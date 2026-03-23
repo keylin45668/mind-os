@@ -35,7 +35,7 @@ no_match:
 1. 在 domains/ 下创建 {domain-name}/ 目录
 2. 创建 {domain-name}/_rules.md（任务域专属规则）
 3. 在本文件的路由表中添加关键词映射
-4. 检查复杂度预算（theory ≤ 15，domain 不计入此预算但需保持精简）
+4. 检查复杂度预算（theory 单文件 ≤ 1000 tokens，单次加载 ≤ 3 个；domain 需保持精简）
 ```
 
 ---

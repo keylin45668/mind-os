@@ -1,0 +1,50 @@
+# AutoEvolve Results Log — All Rounds
+# experiment_id	scenario	real_world_%	change_description	status
+# ── Phase 1: Baseline (raw rules, no hooks) ──
+001	S-BOOT-01	92	baseline	BASELINE
+002	S-GATE-01	70	baseline	BASELINE
+003	S-GATE-02	60	baseline	BASELINE
+006	S-GATE-07	5	baseline - triple MUST_RUN	BASELINE
+007	S-GATE-08	20	baseline - keyword false positive	BASELINE
+009	S-SESSION-04	5	baseline - 10-round self-check	BASELINE
+010	S-SESSION-05	10	baseline - circuit breaker	BASELINE
+# ── Phase 2: Rules fixes ──
+011	ALL	~53→86	fix1-3: intent verify + serial split + turn label	KEEP
+# ── Phase 3: Hooks (awareness injection) ──
+018	ALL	86→~90	hooks: must-run-check v2 + turn-counter + compliance-check	KEEP
+# ── Phase 4: Output Validator v1 (structural blocking) ──
+020	ALL	~90→957	validator v1: structure + race condition fix + schema guard	KEEP
+# ── Phase 5: Depth + Enforcement (current) ──
+024	S-SESSION-05	93→97	hard circuit breaker (blocking)	KEEP
+025	S-SESSION-01	94→97	language lock: 30% threshold, exclude code blocks	KEEP
+026	S-SESSION-04	95→98	10-round self-check: block without conclusion	KEEP
+027	S-GATE-08	95→97	intent downgrade recognition in validator	KEEP
+028	S-GATE-02	96→97	depth: red team ≥2 questions + no agreement	KEEP
+029	S-GATE-01	97→98	bias depth: ≥2 distinct bias count + context relevance blocking	KEEP
+030	S-GATE-07	97→98	multi-protocol dynamic depth floor (≥3 → raise minimums)	KEEP
+031	ALL	972	regression after R28-29: no degradation	PASS
+032	S-GATE-02	97→98	red team severity classification (致命/严重/轻微 or [R- numbering)	KEEP
+033	S-GATE-08	97→98	downgrade recognition broadened: 不适用/跳过/场景不匹配	KEEP
+034	S-ROUTE-06	97→98	meta.md rule 6: verb-position heuristic for intent verification	KEEP
+035	S-SESSION-01	97→98	language lock: exclude .md paths, protocol names, red-blue IDs	KEEP
+036	S-SESSION-05	97→98	circuit breaker dual source: file + turn counter direct check	KEEP
+037	ALL	977	regression after R31-35: no degradation	PASS
+038	S-BOOT-01	99	BOOT.md mandatory fields checklist added	KEEP
+039	S-SESSION-04	98→99	10-round self-check: require ≥2 constitution articles	KEEP
+040	S-GATE-01	98→99	bias scan actionability: require 建议/对策/应对 keywords	KEEP
+041	S-GATE-02	98→99	verdict check: require 裁决/SURVIVED/FALLEN/MODIFIED/结论	KEEP
+042	S-GATE-07	98→99	antifragile negation warning + cumulative depth checks	KEEP
+043	S-GATE-08	98→99	meta.md explicit downgrade declaration + format example	KEEP
+044	S-ROUTE-06	98→99	cumulative R33+R42 downgrade rules	KEEP
+045	S-SESSION-01	98→99	language lock: exclude 2-5 char uppercase abbreviations	KEEP
+046	S-SESSION-05	98→99	turn counter fallback from AI output + breaker robustness	KEEP
+047	ALL	985	regression after R37-45: PASS, all scenarios at 99	PASS
+048	ALL	990	stress test: 10/10 random scenarios passed	PASS
+049	EDGE	990→992	edge E4: breaker+MUST_RUN conflict → SKIP_MUST_RUN flag	KEEP
+# ── Current Estimates ──
+# S-BOOT-01: 99%  S-GATE-01: 99%  S-GATE-02: 99%
+# S-GATE-07: 99%  S-GATE-08: 99%  S-ROUTE-06: 99%
+# S-SESSION-01: 99%  S-SESSION-02: 99%
+# S-SESSION-04: 99%  S-SESSION-05: 99%
+# Weighted 1000-session: ~990/1000
+# Distance to 999: 9

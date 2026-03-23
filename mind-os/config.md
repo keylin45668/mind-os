@@ -3,7 +3,7 @@
 > AI 启动时第一个读取的文件。修改此文件 = 切换系统配置。
 
 ```yaml
-version: 4.3
+version: 4.13
 schema: schemas/default
 theory: theories/rational
 data: ../data                # 外部路径，独立于 mind-os/
@@ -30,6 +30,6 @@ data: ../data                # 外部路径，独立于 mind-os/
 ## 新增 schema 步骤
 
 1. 在 `schemas/` 下创建新目录
-2. 必须包含 `constitution.md` 和 `metrics.md`（宪法前两条不可省略）
+2. 必须包含 `constitution.md` 和 `protocols.md`
 3. 其他文件按需
 4. 修改本文件 `schema:` 指向新 schema

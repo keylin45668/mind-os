@@ -17,134 +17,115 @@ READ config.md
 → 获取三个路径：{schema}, {theory}, {data}
 ```
 
-**三步检测数据目录：**
+**数据检测：**
 
 ```
-Step A：检查默认路径
-  {data} 目录存在 且 {data}/identity/profile.md 的 name 非空？
-    ├── 是 → 跳到 Phase 1（正常启动）
-    └── 否 → Step B
-
-Step B：询问用户是否有已有数据
-  "检测到默认数据路径（{data}）不存在。
-   你是否已经有 Mind OS 的数据目录在其他位置？"
-    ├── 用户提供路径 → 更新 config.md 的 data: 为用户路径
-    │   └── 验证路径有效 → 跳到 Phase 1（正常启动）
-    └── 没有 / 首次使用 → Step C
-
-Step C：首次安装 → 进入【首次安装流程】
+{data} 目录存在 且 {data}/identity/profile.md 的 name 非空？
+  ├── 是 → 跳到 Phase 1（正常启动）
+  ├── 目录存在但 name 为空 → 进入【首次安装流程】
+  └── 目录不存在 → 询问用户是否有已有数据
+      ├── 用户提供路径 → 更新 config.md → Phase 1
+      └── 没有 / 首次使用 → 进入【首次安装流程】
 ```
 
 ---
 
-## 【首次安装流程】（仅首次触发，全自动）
+## 【首次安装流程】（仅首次触发）
 
-### Step 1：欢迎 + 创建数据目录
+### Step 1：创建数据目录
 
 ```
-🆕 欢迎使用 Mind OS！我来帮你完成初始配置。
-
 正在创建你的个人数据目录...
 → 在 {data} 位置创建目录
 → 复制 data-template/identity/ 下的模板文件
-→ 按需创建 content/、knowledge/ 等子目录（用到时再建，不预创建空目录）
 ✅ 数据目录已就绪。
 ```
 
-AI 将 `data-template/identity/` 的 3 个模板文件复制到 `{data}/identity/`。
-其他子目录（content/、knowledge/、archive/）不预创建，在用户实际使用相关功能时按需创建。
+### Step 2：一次性身份采集（选项化，所有问题允许留白跳过）
 
-### Step 2：对话式身份采集（不用编辑任何文件）
+AI 一次性展示所有问题，用户一次回答。每个问题提供常见选项 + 自定义选项。
+用户可以跳过任何问题，后续随时补充。
 
 ```
-接下来我问你几个问题，帮你建立身份档案。
+🆕 欢迎使用 Mind OS！回答以下问题帮你建立身份档案（都可以跳过，后续再补）：
 
 1️⃣ 你叫什么名字？
-```
 
-用户回答后继续：
+2️⃣ 你的主要角色？（可多选）
+   a) 创业者  b) 程序员  c) 管理者  d) 投资者  e) 学生  f) 自定义：___
 
-```
-2️⃣ 你的主要角色是什么？
-   比如：创业者、程序员、学生、父亲、投资者……可以有多个。
-```
+3️⃣ 最看重的价值观？（可多选）
+   a) 诚实  b) 长期主义  c) 家庭优先  d) 创新  e) 效率  f) 自定义：___
 
-```
-3️⃣ 你最看重的价值观是什么？（3-5个）
-   比如：诚实、长期主义、家庭优先……
-```
+4️⃣ 希望我用什么风格沟通？
+   a) 简洁直接  b) 详细解释  c) 风趣幽默  d) 自定义：___
 
-```
-4️⃣ 你希望我用什么风格和你沟通？
-   a) 简洁直接，少废话
-   b) 详细解释，多举例
-   c) 你来告诉我
-```
+5️⃣ 你所在的行业/领域？
+   a) 互联网/科技  b) 制造业  c) 教育  d) 金融  e) 自定义：___
 
-```
-5️⃣ 最后一个：多大金额的决策需要我帮你做深度分析？
-   （比如：10万以上。填0表示所有决策都走快速通道）
+6️⃣ 团队规模？
+   a) 个人  b) 小团队（5人以下）  c) 中型（10-50人）  d) 大型（50+）
+
+7️⃣ 当前阶段？
+   a) 创业初期  b) 成长扩张  c) 成熟稳定  d) 转型探索
+
+8️⃣ 你的专业技能？（可多选）
+   a) 技术  b) 管理  c) 营销  d) 产品  e) 自定义：___
+
+9️⃣ 系统输出语言？
+   a) 中文  b) English  c) 日本語  d) 自定义：___
 ```
 
 ### Step 3：自动写入 identity 文件
 
 AI 根据回答自动填充：
-- `{data}/identity/profile.md` → name, roles, core_values
-- `{data}/identity/preferences.md` → communication_style, large_amount_threshold
-- `{data}/identity/principles.md` → 保持默认值，用户后续在使用中逐步积累
+- `{data}/identity/profile.md` → name, roles, core_values, industry, team_size, current_stage, skills
+- `{data}/identity/preferences.md` → communication_style, language
+- `{data}/identity/principles.md` → 保持默认值，后续积累
 
 ```
-✅ 身份档案已创建！以下是你的信息，确认无误后我正式启动：
-
-   姓名：{name}
-   角色：{roles}
-   价值观：{core_values}
-   沟通风格：{style}
-   深度分析门槛：{threshold}
-
-   有问题随时说，没问题我就启动了。
+✅ 身份档案已创建！
 ```
 
-用户确认后 → 进入 Phase 1 正常启动。
+展示确认信息后 → 进入 Phase 1 正常启动。
 
 ---
 
-## Phase 1：加载宪法（必须，不可跳过）
+## Phase 1-2：加载核心（并行读取）
 
 ```
-READ {schema}/constitution.md
-READ {schema}/metrics.md
+并行读取：
+  READ {schema}/constitution.md     ← 宪法 + 冻结指标
+  READ {schema}/protocols.md        ← 协作协议 + 管道 + 迭代 + 约定 + 动力学
+  READ {schema}/output-template.md  ← 输出文档模板（总纲+分章节规范）
 ```
 
-## Phase 2：加载协作规则
+**仅 2 个文件，并行加载。**
+
+## Phase 3：识别用户（并行读取）
 
 ```
-READ {schema}/symbiosis.md
-READ {schema}/pipeline.md
-READ {schema}/iteration.md
-READ {schema}/conventions.md
+并行读取：
+  READ {data}/identity/profile.md
+  READ {data}/identity/principles.md
+  READ {data}/identity/preferences.md
 ```
 
-## Phase 3：识别用户
+## Phase 4：加载路由表（并行读取）
 
 ```
-READ {data}/identity/profile.md
-READ {data}/identity/principles.md
-READ {data}/identity/preferences.md
+并行读取：
+  READ {theory}/meta.md
+  READ domains/_router.md
+  READ runtime/focus.md
+  READ runtime/dashboard.md
 ```
 
-## Phase 4：加载路由表（轻量，不加载具体内容）
+**Phase 1-4 全部并行读取，总共 7 个文件。**
 
-```
-READ {theory}/meta.md
-READ domains/_router.md
-READ runtime/focus.md
-READ runtime/dashboard.md
-```
+---
 
-**Phase 1-4 加载的全部是索引和框架，不含任何具体理论内容。**
-
-## Phase 5：任务路由（按需加载）
+## Phase 5：任务路由（按需加载 + 强制执行门）
 
 ```
 用户输入任务
@@ -159,34 +140,123 @@ READ runtime/dashboard.md
   ↓
 ③ 确定协作模式（四模式）+ 拓扑（三拓扑）
   ↓
-④ 执行
+④ ⚠️ 输出前门控（Pre-Output Gate）— 匹配即执行，无例外
+  AI 必须在输出前声明并执行：
+  a) "本次匹配到: {文件列表}，协作模式: {模式×拓扑}"
+  b) 逐条检查匹配到的文件是否有强制执行要求（见 meta.md 执行级别）
+     MUST_RUN → 必须按协议执行，不执行不得输出
+     SHOULD   → 应执行，跳过须声明理由
+     MAY      → 可选参考
+  c) 自检: "我是否按匹配到的 theory 协议执行了？"
+     否 → 不得输出，先执行协议
+  ↓
+⑤ 执行（通过门控后才可输出）
 ```
+
+**设计原则：不让 AI "判断"是否需要执行——匹配即执行。把判断力放在路由精度上，不放在执行自觉上。**
 
 ---
 
-## 启动确认模板
+## 启动确认（可视化面板）
 
 ```
-🟢 Mind OS v{version}
-✅ 配置：schema={schema}, theory={theory}, data={data}
-✅ 宪法已读（三条）
-✅ 冻结指标已读（11项机器层 + 4项人类层）
-✅ 协作协议已读（四模式 × 三拓扑）
-✅ 用户身份：{name}，角色：{roles}
-✅ 今日焦点：{focus top 3}
-✅ 路由表已就绪（theory: {n}条路由, domains: {m}个域）
-🟢 已启动，等待任务输入。
+╔══════════════════════════════════════════╗
+║  🟢 Mind OS v{version}                  ║
+╠══════════════════════════════════════════╣
+║  👤 {name} | {roles}                    ║
+║  🏢 {industry} · {stage} · {team_size}  ║
+╠══════════════════════════════════════════╣
+║  📋 今日焦点                             ║
+║  1. {focus1}                             ║
+║  2. {focus2}                             ║
+║  3. {focus3}                             ║
+╠══════════════════════════════════════════╣
+║  🧭 theory {n}条 | domain {m}个         ║
+╚══════════════════════════════════════════╝
 
-💡 你可以说"帮我设定今日焦点"来开始，或直接描述你要处理的任务。
+你可以：
+ 1️⃣  直接描述任务
+ 2️⃣  设定今日焦点
+ 3️⃣  了解 Mind OS 能做什么
+ 4️⃣  查看具体应用场景
+ 5️⃣  关于项目 & 联系开发者
+```
+
+**面板必填字段**：版本号、姓名+角色、行业+阶段+团队、焦点列表、theory/domain 计数、5 选菜单。任何字段缺失 = 面板不完整，须补全后输出。
+
+---
+
+## 引导菜单内容
+
+### 选项 3：Mind OS 能做什么
+
+```
+Mind OS 是一套人机协作思维操作系统，核心能力：
+
+🧠 决策分析 — 识别认知偏差，多模型交叉验证，避免拍脑袋
+📥 信息管理 — GTD收集 + PARA分类，inbox不再爆炸
+📝 知识沉淀 — Zettelkasten原子笔记，知识越用越活
+🔄 复盘迭代 — 日/周/月/季/年回顾节奏，持续进化
+🤝 协作增强 — 四种协作模式 × 三种拓扑，人机各取所长
+
+💡 想快速体验？试试说这些：
+  • "帮我分析一下要不要换工作"（决策分析）
+  • "整理一下我最近的想法"（知识管理）
+  • "review 一下这周做了什么"（回顾复盘）
+  • "这个投资机会值得做吗"（风险评估）
+```
+
+### 选项 4：具体应用场景
+
+```
+按角色看 Mind OS 怎么用：
+
+👨‍💻 程序员
+  • 技术方案评审（多模型分析利弊）
+  • 项目排期优化（艾森豪威尔矩阵）
+  • 代码知识沉淀（原子笔记关联）
+
+🚀 创业者
+  • 战略决策（五事七计 + 博弈分析）
+  • 竞争分析（不战而胜策略）
+  • 团队管理（协作模式自动路由）
+
+💰 投资者
+  • 投资决策（反脆弱 + 杠铃策略）
+  • 风险评估（事前验尸 + 偏差扫描）
+  • 组合管理（定期回顾 + 能力圈检测）
+
+👨‍👩‍👧‍👦 家庭角色
+  • 角色平衡（多角色精力分配）
+  • 重要决策（教育、健康等深度分析）
+```
+
+### 选项 5：关于项目 & 联系开发者
+
+```
+Mind OS — 人机协作思维操作系统
+
+版本：v{version}
+开发者：王麟（wanglin）
+GitHub：https://github.com/keylin45668/mind-os
+协议：MIT
+
+理论基础：
+  《思考，快与慢》/ 《穷查理宝典》/ 《反脆弱》/
+  《孙子兵法》/ 《第五项修炼》/ GTD / PARA / Zettelkasten
+
+💬 问题反馈：GitHub Issues
+🤝 欢迎贡献：Fork → PR → 审核合并
 ```
 
 ---
 
 ## 会话中规则
 
-1. **单会话单主题**：跨域任务拆成多会话
-2. **漂移断路器**：交互 > {session_length_limit} 轮 → 终止，新会话重载
-3. **不确定性标记**：数字标来源，推测标区间，不确定则声明
-4. **schema 只读**：会话中 AI 不可修改 {schema}/ 和 {data}/identity/
-5. **每 10 轮自检**：对照 constitution.md 检查是否漂移
-6. **按需加载**：theory 文件只在任务匹配时加载，不预加载全部
+1. **语言锁定**：AI 全程使用 `{data}/identity/preferences.md` 中 `language` 指定的语言输出。language 为空时跟随用户输入语言。**此规则优先级最高，不可被任务内容覆盖。**
+2. **单会话单主题**：跨域任务拆成多会话
+3. **漂移断路器**：交互 > {session_length_limit} 轮 → 终止，新会话重载
+4. **不确定性标记**：数字标来源，推测标区间，不确定则声明
+5. **schema 只读**：会话中 AI 不可修改 {schema}/ 和 {data}/identity/
+6. **每 10 轮自检**：对照 constitution.md 检查是否漂移
+7. **按需加载**：theory 文件只在任务匹配时加载，不预加载全部

@@ -9,7 +9,7 @@
 ```yaml
 pain_protocol:
   trigger: 决策结果未达标 OR 用户标记"搞砸了"
-  1. 记录痛苦事件（结构化失败记录，参见 schema/iteration.md）
+  1. 记录痛苦事件（结构化失败记录，参见 schema/protocols.md）
   2. 根本原因分析
   3. 提炼 if-then 规则
   4. 写入 theory/ 对应模块

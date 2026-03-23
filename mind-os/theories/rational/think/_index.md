@@ -14,6 +14,7 @@
 | 新领域/首次/不熟悉 | bias-competence-circle.md | 能力圈 |
 | 团队决策/薪酬/绩效 | bias-munger25.md | 芒格25条补充 |
 | 审计/迭代/系统检查 | system-audit-method.md | 方法A/B/C/D |
+| 深度思考/多方向/发散/对比分析 | iterative-engine.md | 迭代思考引擎（输出模板见 schemas/default/output-template.md） |
 
 **多偏差叠加规则**：匹配到 ≥ 2 个偏差时全部加载 + 叠加告警：
 - 2 个同向 → 常规告警

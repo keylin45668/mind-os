@@ -5,15 +5,15 @@
 ```yaml
 date: 2026-03-23
 top3:
-  - task: ""
-    status: "pending"     # pending / in_progress / done
-    domain: ""
-  - task: ""
+  - task: "优化 Mind OS"
+    status: "in_progress"
+    domain: "software-dev"
+  - task: "身体健康"
     status: "pending"
-    domain: ""
-  - task: ""
+    domain: "personal"
+  - task: "公司管理"
     status: "pending"
-    domain: ""
+    domain: "strategy"
 
 notes: ""
 ```

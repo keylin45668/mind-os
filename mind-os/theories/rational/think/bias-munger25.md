@@ -19,4 +19,6 @@ consistency_bias:
   trigger: 评估"是否坚持原路线"
   checks: [一致性偏差, 承诺升级]
   protocol: 归零测试 + 反转思维
+
+output: "🧲 芒格检查：场景={scenario}，命中偏差={biases}，对策={actions}"
 ```
