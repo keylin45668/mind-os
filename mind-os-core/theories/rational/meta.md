@@ -1,6 +1,6 @@
 # Theory Pack: rational — 按需加载路由表
 
-> 当前活跃模块：**25**（无预存上限，按需加载）
+> 当前活跃模块：**26**（无预存上限，按需加载）
 > **AI 启动时只读本文件，不加载任何子目录内容。任务进来后按关键词匹配加载。**
 
 ---
@@ -29,6 +29,7 @@
 | `/原则` | 原则/评估/增益 | collaboration/principles.md | MAY | 五维评估+鲁棒性测试 |
 | `/经济` | 经济/成本/资本 | collaboration/economics.md | MAY | 比较优势+认知资本 |
 | `/进化` | 进化/适应度/淘汰/分化 | collaboration/evolution.md | SHOULD | 模块适应度+淘汰归档+生态位分化 |
+| `/结晶` | （自动触发，每次任务后） | review/crystallize.md | SHOULD | 经验结晶三问（模式/缺口/知识） |
 | `/评分` | 会话结束/评分/质量 | review/session-audit.md → review/session-rating.md | **MUST_RUN** | 先执行审查再评分（串行） |
 | `/质量` | 质量循环/打磨/quality loop | think/quality-loop.md | MAY | 任务级质量迭代 |
 | `/深度迭代` | 深度迭代/多轮迭代/加速思考 | think/task-iterate.md | **MUST_RUN** | 任务级自动多轮迭代（蓝红N轮+收敛检测） |

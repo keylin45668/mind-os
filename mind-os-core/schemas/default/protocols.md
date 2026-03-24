@@ -82,9 +82,13 @@ pre_output_gate:
 ### 管道
 
 ```
-inbox → 分流 → 执行/思考 → 沉淀 → 回顾
-                  ↓
-              进化回路（第五条）→ backlog / knowledge → 模块迭代
+inbox → 分流 → 执行/思考 → 结晶 → 沉淀 → 回顾
+                              ↓
+                    review/crystallize.md（三问）
+                    → pattern → knowledge/notes/
+                    → gap → runtime/audits/backlog.md
+                    → knowledge → knowledge/notes/
+                    → 无 → 记录"本次无信号"
 ```
 
 | 阶段 | theory 提供 | output 去向 |
@@ -107,6 +111,21 @@ inbox → 分流 → 执行/思考 → 沉淀 → 回顾
 
 - inbox 积压 > 3 天量 → 降级：只处理紧急+重要
 - 单阶段 > 2 小时 → 提醒拆分
+
+### Runtime 状态标注（强制）
+
+AI 写入 runtime/ 文件时，涉及"推进中但未完成"的事项，必须标注状态，禁止用模糊的"已完成"：
+
+```yaml
+# 状态标签（选一个）
+状态: 进行中 / 已完成 / 待确认 / 已过期 / 已归档
+
+# 推进中事项用四行模板
+- 当前状态: {实际情况}
+- 进度: {完成了什么}
+- 待办: {还差什么}
+- 下一步: {下次会话要做什么}
+```
 
 ---
 
