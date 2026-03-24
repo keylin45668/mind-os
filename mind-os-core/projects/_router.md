@@ -36,11 +36,16 @@ Phase 4 启动时：
 ③ domain 规则 + project 上下文 + theory 方法 → 合并进入 Pre-Output Gate
 ```
 
-### 优先级
+### 优先级（从高到低）
 
-- **project 提供上下文（数据）**，不提供规则
-- **domain 提供领域规则**，project 的 `domain` 字段决定挂载到哪个 domain
-- **theory 提供思考方法**，由连接器卡片的 `theories` 字段指定或走通用路由
+```
+project iron_rules > domain 规则 > theory 规则 > project constraints > 通用 schema
+```
+
+- **iron_rules**：项目铁律，不可违反的业务红线，优先级最高
+- **domain**：领域规则，project 的 `domain` 字段决定挂载到哪个 domain
+- **theory**：思考方法，由卡片 `theories` 字段指定或走通用路由
+- **constraints**：项目约束，叠加在 domain 之上
 - 冲突时：domain 规则 > project 上下文 > 通用 theory
 
 ### 连接器卡片格式
@@ -64,6 +69,10 @@ theories: [think/_index.md, decide/rules.md]
 
 # 默认协作模式
 collaboration: 对等协作 × 迭代
+
+# 项目铁律（不可违反的业务红线，优先级最高）
+iron_rules:
+  - 铁律描述
 
 # 项目专属约束（可选，叠加在 domain 规则之上）
 constraints:

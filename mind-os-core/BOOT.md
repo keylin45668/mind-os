@@ -557,6 +557,7 @@ collaborative: true/false    # true=团队协作，false=独立使用
 ①½ 查 Phase 4 动态构建的项目路由表 → 匹配到项目？
   ├── 是 → READ local/projects/{matched}.md（连接器卡片）
   │     → 按 context_files 读取项目上下文（受 3 文件上限约束）
+  │     → 项目 iron_rules 作为不可违反红线（优先级 > theory > domain）
   │     → 项目 constraints 叠加到本次任务约束
   │     → 声明: "📂 已接入项目: {name}（{repo}）"
   └── 否 → 跳过

@@ -21,6 +21,13 @@ theories:
 # 默认协作模式
 collaboration: 对等协作 × 迭代
 
+# 项目铁律（不可违反的业务红线，优先级 > theory 规则 > domain 规则）
+iron_rules: []
+  # 示例:
+  # - "所有制度修改不得违反劳动法"
+  # - "数据库变更必须经 DBA 审批"
+  # - "对外报价必须走审批流程"
+
 # 项目专属约束（可选，叠加在 domain 规则之上）
 constraints: []
 
