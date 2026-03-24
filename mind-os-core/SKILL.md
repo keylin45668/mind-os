@@ -6,60 +6,15 @@ description: |
 
 # Mind OS — Skill 入口
 
-> **本文件是 Skill 系统的入口。** 实际启动逻辑在 BOOT.md 中。
+> 本文件是 Skill 适配层。实际逻辑在 BOOT.md。
 
 ## 加载指令
 
-收到触发后，执行以下步骤：
+1. `READ BOOT.md`（同目录）
+2. 按 Phase 0-5 顺序执行，不跳过
+3. 首次使用时 BOOT.md 自动引导配置
 
-1. **读取启动协议**：`READ BOOT.md`（与本文件同目录）
-2. **按 BOOT.md 的 Phase 0-5 顺序执行**，不要跳过任何阶段
-3. **首次使用时**，BOOT.md 会自动检测并引导用户完成配置
+## 注意
 
-## 什么是 Mind OS
-
-一切认知活动 = `Transform(input, context) → output`，其中：
-
-```
-context = schema ⊕ theory ⊕ data
-```
-
-- **schema**（架构）：管道怎么连——工作流、指标、协作规则
-- **theory**（理论）：用什么方法——按需加载的方法论模块
-- **data**（数据）：谁在用——用户身份、偏好、积累的知识
-
-三者正交，物理隔离，`config.md` 一行切换。
-
-## 核心能力
-
-- **认知偏差免疫**：9 种偏差自动检查（锚定、WYSIATI、损失厌恶、过度自信等）
-- **多模型决策**：6+ 思维模型（反演、第一性原理、贝叶斯更新等）
-- **反脆弱分析**：三元分类 + 杠铃策略 + 压力注入
-- **系统动力学**：7 种系统陷阱识别 + 杠杆点分析
-- **协作拓扑**：4 种模式 × 3 种拓扑，动态匹配任务类型
-- **领域路由**：软件开发、财务、战略等领域专属规则
-
-## 文件结构
-
-```
-mind-os/
-├── SKILL.md          ← 你在这里（Skill 入口）
-├── BOOT.md           ← AI 启动协议（Phase 0-5）
-├── config.md         ← 配置开关（schema/theory/data 路径）
-├── schemas/default/  ← 系统架构（宪法 + 协作协议）
-├── theories/rational/ ← 方法论模块（18 条路由，按需加载）
-├── domains/          ← 领域专属规则（6 个领域）
-├── projects/         ← 项目连接器（给外部项目装脑子）
-├── autoevolve/       ← 自迭代引擎
-├── data-template/    ← 首次安装用的空白数据模板
-├── runtime/          ← 会话运行时状态
-├── scripts/          ← Claude Code Hooks 脚本
-└── tests/            ← 架构测试 + 引擎测试
-```
-
-## 注意事项
-
-- **BOOT.md 是实际逻辑**，本文件仅做 Skill 适配层
-- **theory 按需加载**：不要一次读取 theories/ 下所有文件，通过 `meta.md` 路由表按关键词匹配
-- **schema 只读**：会话中 AI 不可修改 schemas/ 和 data/identity/
-- **首次使用**：BOOT.md Phase 0 会自动检测并引导，无需人工干预
+- theory 按需加载：通过 `meta.md` 路由表匹配，不要一次读取全部
+- schema 只读：会话中 AI 不可修改 schemas/ 和 data/identity/

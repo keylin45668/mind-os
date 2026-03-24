@@ -38,27 +38,7 @@ context = schema ⊕ theory ⊕ data
 
 ## 快速开始
 
-### 方式一：整体启动（推荐首次使用）
-
-```
-git clone https://github.com/keylin45668/mind-os.git
-cd mind-os/..    # 进入 mind-os 的父目录
-# 打开 Claude Code，说"启动"
-```
-
-AI 自动完成：检测首次使用 → 创建身份档案 → 引导配置 → 启动系统。
-
-### 方式二：给已有项目装脑子（v5.1 新增）
-
-在你的项目目录里，对 AI 说：
-
-```
-安装 mind-os ../mind-os
-```
-
-AI 自动完成：检测项目 → 问你两个问题 → 生成连接器 → 验证连接。之后正常工作，需要深度思考时说**「帮我想清楚」**即可。
-
-详见 [projects/INSTALL.md](projects/INSTALL.md)。
+详见 [SETUP.md](SETUP.md)（4 种安装方式）。最简单：把项目文件夹设为工作目录，说"启动"。
 
 ---
 
