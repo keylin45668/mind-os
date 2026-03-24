@@ -117,7 +117,7 @@ AI 自动映射（不弹窗）：
 
 AI 一次性生成，不需要用户确认内容。
 
-### 文件 1：连接器卡片 → `{mind_os}/projects/{project_id}.md`
+### 文件 1：连接器卡片 → `{mind_os}/local/projects/{project_id}.md`
 
 ```markdown
 # 连接器：{project_dir}
@@ -189,11 +189,11 @@ connector: projects/{project_id}.md
 都没有 → 创建 CLAUDE.md 只含这一行
 ```
 
-### 文件 4：更新路由表 → `{mind_os}/projects/_router.md`
+### 文件 4：确认 `local/projects/` 目录存在
 
 ```
-在路由表末尾追加一行：
-| {keywords 用 / 分隔} | {project_id} | projects/{project_id}.md | {domain} |
+确保 {mind_os}/local/projects/ 目录存在（不存在则创建）。
+路由表无需手动更新——启动时 AI 自动扫描 local/projects/*.md 动态构建。
 ```
 
 ---
@@ -205,7 +205,7 @@ connector: projects/{project_id}.md
 ║  ✅ Mind OS 已安装                       ║
 ╠══════════════════════════════════════════╣
 ║  📂 项目: {project_dir}                  ║
-║  🔗 连接器: projects/{project_id}.md     ║
+║  🔗 连接器: local/projects/{project_id}.md ║
 ║  🧭 域: {domain} · 理论: {n} 个          ║
 ╠══════════════════════════════════════════╣
 ║  💡 使用方式：                            ║
@@ -220,7 +220,7 @@ connector: projects/{project_id}.md
 
 ```
 立即验证（不弹窗）：
-  ① READ {mind_os}/projects/{project_id}.md  → ✅/❌
+  ① READ {mind_os}/local/projects/{project_id}.md  → ✅/❌
   ② READ {mind_os}/schemas/default/constitution.md 前 5 行 → ✅/❌
   ③ READ .mind-os.md → ✅/❌
   全部 ✅ → "🧠 连接检测通过"

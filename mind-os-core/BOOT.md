@@ -12,7 +12,7 @@
 
 ```
 ① 读取本地版本
-  READ config.md → 提取 version 字段 → {local_version}
+  READ local/config.md（不存在则 fallback config-template.md）→ 提取 version 字段 → {local_version}
 
 ② 获取远程版本（静默，失败不阻塞）
   执行: curl -s --max-time 5 https://raw.githubusercontent.com/keylin45668/mind-os/main/mind-os/config.md
@@ -60,11 +60,16 @@ AskUserQuestion:
 ## Phase 0：读取配置 + 档案选择 + 数据检测
 
 ```
-READ config.md
+READ local/config.md
+  ├── 存在 → 使用该文件
+  └── 不存在 → READ config-template.md → 复制到 local/config.md → 提示用户填写
 → 获取版本号：{version}
 → 获取 {schema}, {theory}
 → 获取 data_profiles 列表
 ```
+
+> **配置分层**：`config-template.md` 是发行版模板（tracked），`local/config.md` 是个人实例（gitignored）。
+> 首次启动时自动从模板创建本地配置。
 
 ### 档案选择
 
@@ -506,12 +511,16 @@ collaborative: true/false    # true=团队协作，false=独立使用
 并行读取：
   READ {theory}/meta.md
   READ domains/_router.md
-  READ projects/_router.md        ← 项目连接器路由表
+  READ projects/_router.md        ← 项目连接器路由机制说明
+  SCAN local/projects/*.md        ← 扫描所有个人项目连接器，动态构建路由表
   READ runtime/focus.md
   READ runtime/dashboard.md
 ```
 
-**Phase 1-4 全部并行读取，总共 8 个文件。**
+> **项目连接器分层**：`projects/_router.md` 定义路由机制，`local/projects/*.md` 存放个人连接器卡片。
+> 启动时扫描 `local/projects/` 下所有 `.md` 文件，读取每个卡片的 `keywords` 字段，动态构建路由表。
+
+**Phase 1-4 全部并行读取，总共 8+ 个文件（取决于连接器数量）。**
 
 ### 焦点日期处理（Phase 4 完成后立即执行）
 
@@ -545,8 +554,8 @@ collaborative: true/false    # true=团队协作，false=独立使用
   ├── 是 → READ domains/{matched}/_rules.md
   └── 否 → 跳过
   ↓
-①½ 查 projects/_router.md → 匹配到项目？
-  ├── 是 → READ projects/{matched}.md（连接器卡片）
+①½ 查 Phase 4 动态构建的项目路由表 → 匹配到项目？
+  ├── 是 → READ local/projects/{matched}.md（连接器卡片）
   │     → 按 context_files 读取项目上下文（受 3 文件上限约束）
   │     → 项目 constraints 叠加到本次任务约束
   │     → 声明: "📂 已接入项目: {name}（{repo}）"

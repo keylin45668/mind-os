@@ -6,22 +6,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-stop-guard.sh",
+            "command": "bash mind-os-core/scripts/hook-stop-guard.sh",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-compliance-check.sh",
+            "command": "bash mind-os-core/scripts/hook-compliance-check.sh",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-output-validator.sh",
+            "command": "bash mind-os-core/scripts/hook-output-validator.sh",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-session-rating.sh",
+            "command": "bash mind-os-core/scripts/hook-session-rating.sh",
             "timeout": 10
           }
         ]
@@ -33,7 +33,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-schema-guard.sh",
+            "command": "bash mind-os-core/scripts/hook-schema-guard.sh",
             "timeout": 5
           }
         ]
@@ -45,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-post-compact.sh",
+            "command": "bash mind-os-core/scripts/hook-post-compact.sh",
             "timeout": 10
           }
         ]
@@ -57,17 +57,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-session-reset.sh",
+            "command": "bash mind-os-core/scripts/hook-session-reset.sh",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-turn-counter.sh",
+            "command": "bash mind-os-core/scripts/hook-turn-counter.sh",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "bash mind-os/scripts/hook-must-run-check.sh",
+            "command": "bash mind-os-core/scripts/hook-must-run-check.sh",
             "timeout": 10
           }
         ]

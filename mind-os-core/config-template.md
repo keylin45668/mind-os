@@ -1,6 +1,7 @@
-# Mind OS 运行配置
+# Mind OS 运行配置（模板）
 
-> AI 启动时第一个读取的文件。修改此文件 = 切换系统配置。
+> **这是配置模板。** 首次启动时自动复制到 `local/config.md`，在那里填写你的真实信息。
+> 修改 `local/config.md` = 切换系统配置。本文件不要直接修改。
 
 ```yaml
 version: 5.1
@@ -9,27 +10,17 @@ theory: theories/rational
 
 # 数据档案（支持多份，启动时选择）
 data_profiles:
-  - id: wanglin
-    name: "王麟"
+  - id: default
+    name: ""                   # ← 首次启动时填写你的名字
     path: "../data"
     description: "主档案"
     default: true
 
-  - id: test
-    name: "测试用户"
-    path: "../data-test"
-    description: "测试档案（可删除）"
-
   # 新增档案示例（取消注释即可用）：
   # - id: work
-  #   name: "王麟-工作"
+  #   name: "你的名字-工作"
   #   path: "../data-work"
   #   description: "工作专用档案"
-  #
-  # - id: teammate-a
-  #   name: "张三"
-  #   path: "../data-zhangsan"
-  #   description: "团队成员张三"
 ```
 
 ---

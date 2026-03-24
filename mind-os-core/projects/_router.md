@@ -8,18 +8,25 @@
 ## 机制说明
 
 ```
-projects/
-  _router.md          ← 本文件：索引 + 路由规则
-  {project-id}.md      ← 连接器卡片：一张卡 = 一个项目
+mind-os-core/projects/
+  _router.md          ← 本文件：路由机制说明
+  _example.md         ← 连接器卡片模板
+  INSTALL.md          ← 安装协议
+
+local/projects/
+  {project-id}.md      ← 个人连接器卡片：一张卡 = 一个项目（gitignored）
 ```
 
 ### 运行时路由（Phase 5 追加步骤）
 
 ```
+Phase 4 启动时：
+  SCAN local/projects/*.md → 读取每个卡片的 keywords 字段 → 构建内存路由表
+
 用户描述任务
   ↓
 ① 查 domains/_router.md（现有逻辑不变）
-② 查 projects/_router.md（本文件）
+② 查内存路由表（由 local/projects/*.md 动态构建）
   ├── 关键词命中 → 读对应连接器卡片
   │     → 读 context_files 获取项目上下文
   │     → 加载指定 theories（受 meta.md 3文件上限约束）
@@ -38,8 +45,10 @@ projects/
 
 ### 连接器卡片格式
 
+> 卡片模板见 `projects/_example.md`，复制到 `local/projects/{project-id}.md` 后填写。
+
 ```yaml
-# {project-id}.md
+# local/projects/{project-id}.md
 name: 项目显示名
 repo: 相对路径或绝对路径
 domain: 挂载到哪个 domain（对应 domains/ 下的目录名）
@@ -78,11 +87,15 @@ output:
 
 ---
 
-## 路由表
+## 路由表（动态构建）
 
-| 关键词 | 项目 ID | 连接器卡片 | Domain |
-|--------|---------|-----------|--------|
-| 制度/合规/薪酬/员工手册/劳动法/HR/人事 | zhidu-youhua | projects/zhidu-youhua.md | people |
+> **路由表不再硬编码。** 启动时 AI 扫描 `local/projects/*.md`，读取每个卡片的 `keywords` 和 `domain` 字段，在内存中构建路由表。
+>
+> 格式示例（运行时内存中的结构）：
+>
+> | 关键词 | 项目 ID | 连接器卡片 | Domain |
+> |--------|---------|-----------|--------|
+> | {卡片中的 keywords} | {文件名去 .md} | local/projects/{id}.md | {卡片中的 domain} |
 
 ---
 
@@ -90,17 +103,17 @@ output:
 
 | 操作 | 怎么做 |
 |------|--------|
-| 接入新项目 | ① 在 `projects/` 下新建 `{id}.md` ② 在上方路由表加一行 ③ 在项目仓库中放 `.mind-os.md` 桥接文件 |
-| 断开项目 | 删除卡片文件 + 删除路由表对应行 + 删除项目中的 `.mind-os.md` |
-| 调整接入深度 | 改卡片中的 `context_files` 和 `theories` |
-| 临时禁用 | 在路由表行首加 `<!-- ... -->` 注释 |
+| 接入新项目 | ① 复制 `projects/_example.md` 到 `local/projects/{id}.md` 并填写 ② 在项目仓库中放 `.mind-os.md` 桥接文件（路由表自动构建，无需手动编辑） |
+| 断开项目 | 删除 `local/projects/{id}.md` + 删除项目中的 `.mind-os.md` |
+| 调整接入深度 | 改 `local/projects/{id}.md` 中的 `context_files` 和 `theories` |
+| 临时禁用 | 重命名卡片文件（如加 `.disabled` 后缀），扫描时自动跳过 |
 
 ## 双向连接
 
 连接器是**双向**的：
 
 ```
-Mind OS 侧（projects/{id}.md）        项目侧（{repo}/.mind-os.md）
+Mind OS 侧（local/projects/{id}.md）    项目侧（{repo}/.mind-os.md）
 ┌─────────────────────┐              ┌─────────────────────┐
 │ Mind OS → 读项目数据  │              │ 项目 → 调用 Mind OS  │
 │                     │              │                     │
@@ -128,7 +141,7 @@ Mind OS 侧（projects/{id}.md）        项目侧（{repo}/.mind-os.md）
 
 ```yaml
 mind_os: ../mind-os                    # ← 改成实际相对路径
-connector: projects/{id}.md            # ← 改成实际连接器文件名
+connector: local/projects/{id}.md            # ← 改成实际连接器文件名
 ```
 
 ## 启动检测（会话首次启动时自动执行）
