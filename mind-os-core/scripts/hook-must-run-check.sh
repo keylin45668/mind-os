@@ -63,8 +63,8 @@ if [ -n "$REMINDERS" ]; then
     echo "$USER_MSG" | grep -qiE '风险|投资|反脆弱|赌|押注|亏|赔' && ACTIVE_PROTOCOLS="${ACTIVE_PROTOCOLS}antifragile "
     echo "$USER_MSG" | grep -qiE '审计|系统检查|自检|诊断系统' && ACTIVE_PROTOCOLS="${ACTIVE_PROTOCOLS}system-audit "
 
-    mkdir -p mind-os/runtime
-    echo "$ACTIVE_PROTOCOLS" > "mind-os/runtime/.must-run-active"
+    mkdir -p mind-os-core/runtime
+    echo "$ACTIVE_PROTOCOLS" > "mind-os-core/runtime/.must-run-active"
 
     # ── 输出提醒 ──────────────────────────────────────
     echo "【Pre-Output Gate · Hook 注入】"
@@ -89,7 +89,7 @@ if [ -n "$REMINDERS" ]; then
         echo "→ 不可在同一输出中压缩执行 3 个重量级协议。"
         echo "→ 输出验证器将检查: 是否声明了拆分 + 是否建议了后续会话。"
         # 写入拆分标记
-        echo "split_required" > "mind-os/runtime/.must-run-split"
+        echo "split_required" > "mind-os-core/runtime/.must-run-split"
     fi
 
     echo ""

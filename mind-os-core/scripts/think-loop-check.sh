@@ -2,7 +2,7 @@
 # think-loop-check.sh — 配合 /loop 轮询的状态检查脚本
 #
 # 用法（在 Claude Code 中）:
-#   /loop 30s ./mind-os/scripts/think-loop-check.sh runtime/thinking/task-001
+#   /loop 30s ./mind-os-core/scripts/think-loop-check.sh runtime/thinking/task-001
 #
 # 功能:
 #   检查指定任务目录下的 .wait_status 文件

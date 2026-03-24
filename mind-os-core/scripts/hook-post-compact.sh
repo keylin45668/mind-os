@@ -29,7 +29,7 @@ if [ -n "$ACTIVE_TASK" ] && [ -f "$CONTEXT_FILE" ]; then
     echo "2. $THINKING_DIR/$ACTIVE_TASK/queue.md（工作队列，找 [TODO] 或 [DOING] 继续）"
     echo "3. $THINKING_DIR/$ACTIVE_TASK/state.yaml（完整状态）"
 else
-    echo "上下文已压缩。如有进行中的任务，请检查 mind-os/runtime/thinking/ 目录。"
+    echo "上下文已压缩。如有进行中的任务，请检查 mind-os-core/runtime/thinking/ 目录。"
 fi
 
 exit 0

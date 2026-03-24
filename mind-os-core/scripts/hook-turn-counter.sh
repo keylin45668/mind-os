@@ -7,7 +7,7 @@
 
 # 使用 PPID 区分不同会话窗口，避免多窗口共享计数
 SESSION_ID="${CLAUDE_SESSION_ID:-$PPID}"
-COUNTER_DIR="mind-os/runtime/sessions"
+COUNTER_DIR="mind-os-core/runtime/sessions"
 mkdir -p "$COUNTER_DIR"
 COUNTER_FILE="${COUNTER_DIR}/.turn-counter-${SESSION_ID}"
 

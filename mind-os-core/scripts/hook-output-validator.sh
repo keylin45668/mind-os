@@ -10,10 +10,10 @@
 #   Layer 3: 流程完整性（轮次标记、意图分类）
 
 INPUT=$(cat)
-MARKER_FILE="mind-os/runtime/.must-run-active"
+MARKER_FILE="mind-os-core/runtime/.must-run-active"
 # Per-session 计数器和断路器
 SESSION_ID="${CLAUDE_SESSION_ID:-$PPID}"
-COUNTER_FILE="mind-os/runtime/sessions/.turn-counter-${SESSION_ID}"
+COUNTER_FILE="mind-os-core/runtime/sessions/.turn-counter-${SESSION_ID}"
 
 # 防无限循环
 if echo "$INPUT" | grep -q '"validator_hook_active"[[:space:]]*:[[:space:]]*true'; then
@@ -64,7 +64,7 @@ SKIP_MUST_RUN=false
 # 检查语言锁定
 # 读取 preferences 中的 language 设置
 LANG_PREF=""
-for PREF_PATH in "../data/identity/preferences.md" "mind-os/data-template/identity/preferences.md"; do
+for PREF_PATH in "../data/identity/preferences.md" "mind-os-core/data-template/identity/preferences.md"; do
     if [ -f "$PREF_PATH" ]; then
         LANG_PREF=$(grep '^language:' "$PREF_PATH" 2>/dev/null | sed 's/^language:[[:space:]]*//' | tr -d '"' | head -1)
         break
@@ -147,7 +147,7 @@ if [ -f "$MARKER_FILE" ] && [ "$SKIP_MUST_RUN" = false ]; then
     fi
 
     # 1f. ≥3 协议强制拆分检查
-    SPLIT_FILE="mind-os/runtime/.must-run-split"
+    SPLIT_FILE="mind-os-core/runtime/.must-run-split"
     if [ -f "$SPLIT_FILE" ]; then
         if ! echo "$INPUT" | grep -qE '拆分.*会话|新.*会话.*处理|后续会话|分会话|下个会话'; then
             ISSUES="${ISSUES}

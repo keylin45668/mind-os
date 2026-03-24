@@ -11,7 +11,7 @@ USER_MSG=$(echo "$INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); 
 
 # 使用与 turn-counter 相同的会话标识
 SESSION_ID="${CLAUDE_SESSION_ID:-$PPID}"
-COUNTER_DIR="mind-os/runtime/sessions"
+COUNTER_DIR="mind-os-core/runtime/sessions"
 COUNTER_FILE="${COUNTER_DIR}/.turn-counter-${SESSION_ID}"
 
 # 检测启动信号

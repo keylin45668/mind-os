@@ -4,8 +4,8 @@
 # 检查 AI 最近输出是否包含必要的合规标记
 # 仅在 MUST_RUN 命中时检查（通过检测 .must-run-active 标记文件）
 
-MARKER_FILE="mind-os/runtime/.must-run-active"
-COUNTER_FILE="mind-os/runtime/.turn-counter"
+MARKER_FILE="mind-os-core/runtime/.must-run-active"
+COUNTER_FILE="mind-os-core/runtime/.turn-counter"
 
 INPUT=$(cat)
 
