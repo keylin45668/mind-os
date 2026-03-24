@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mind OS v4.4 — 全系统自动化测试脚本
+# Mind OS v5.0 — 全系统自动化测试脚本
 # 用法: bash mind-os/test.sh
 # 纯脚本验证，不依赖 AI 判断，确保每次执行结果一致。
 

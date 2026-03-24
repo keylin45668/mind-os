@@ -3,7 +3,7 @@
 > AI 启动时第一个读取的文件。修改此文件 = 切换系统配置。
 
 ```yaml
-version: 4.13
+version: 5.0
 schema: schemas/default
 theory: theories/rational
 data: ../data                # 外部路径，独立于 mind-os/

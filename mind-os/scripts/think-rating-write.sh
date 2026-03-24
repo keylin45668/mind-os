@@ -67,7 +67,7 @@ read F1 F2 F3 F4 F5 H_AVG AI_AVG F_AVG <<< "$CALC"
 # ── 初始化评分表（如不存在）──
 
 if [ ! -f "$CURRENT" ]; then
-    cat > "$CURRENT" << 'EOF'
+    cat > "$CURRENT" << EOF
 # 会话评分表
 
 > 创建时间: $(date '+%Y-%m-%d')
@@ -77,8 +77,6 @@ if [ ! -f "$CURRENT" ]; then
 | 日期 | 任务摘要 | D1 | D2 | D3 | D4 | D5 | H均 | AI均 | 总分 |
 |------|---------|----|----|----|----|-----|-----|------|------|
 EOF
-    # 修复日期
-    sed -i "s/\$(date '+%Y-%m-%d')/$(date '+%Y-%m-%d')/" "$CURRENT"
 fi
 
 # ── 追加记录 ──

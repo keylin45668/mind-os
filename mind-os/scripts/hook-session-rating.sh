@@ -79,7 +79,7 @@ TIMESTAMP=$(date '+%m-%d %H:%M')
 
 cat << EOF
 ────────────────────────────────────
-📊 会话评分（Mind OS v4.9）
+📊 会话评分（Mind OS v5.0）
 
 AI 自评: D1=$AI_D1 D2=$AI_D2 D3=$AI_D3 D4=$AI_D4 D5=$AI_D5 (均分 ${AI_AVG_INT}.${AI_AVG_DEC})
 

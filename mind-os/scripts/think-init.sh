@@ -34,8 +34,9 @@ MAX_ROUNDS=$(awk "BEGIN {
     print r
 }")
 
-# 创建任务目录
-TASK_DIR="runtime/thinking/$TASK_NAME"
+# 创建任务目录（锚定到脚本所在目录的上级，即 mind-os/）
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+TASK_DIR="$SCRIPT_DIR/../runtime/thinking/$TASK_NAME"
 mkdir -p "$TASK_DIR"
 
 # 写 state.yaml

@@ -318,6 +318,8 @@ if [ -n "$ISSUES" ]; then
     if [ -n "$WARNINGS" ]; then
         BLOCK_MSG="${BLOCK_MSG}\n\n另外注意：${WARNINGS}"
     fi
+    # 转义换行符，确保 JSON 合法
+    BLOCK_MSG=$(printf '%s' "$BLOCK_MSG" | sed ':a;N;$!ba;s/\n/\\n/g')
     cat << EOF
 {
   "decision": "block",

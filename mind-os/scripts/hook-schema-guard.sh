@@ -35,7 +35,10 @@ case "$FILE_PATH" in
         ;;
     *schemas/default/protocols.md*)
         # protocols.md 允许 AutoEvolve 修改，但会话中 AI 不可修改
-        # 这里放行，因为修改应该通过 autoevolve 流程
+        # AutoEvolve 通过设置 AUTOEVOLVE_ACTIVE=true 环境变量来绕过此检查
+        if [ "${AUTOEVOLVE_ACTIVE:-}" != "true" ]; then
+            BLOCKED="protocols.md（协议文件会话中只读，仅 AutoEvolve 可修改）"
+        fi
         ;;
     *identity/profile.md*|*identity/preferences.md*|*identity/principles.md*)
         BLOCKED="identity/ 文件（人类主权区域）"
