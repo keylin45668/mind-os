@@ -14,7 +14,7 @@ set -euo pipefail
 TASK_SUMMARY=${1:?"Usage: $0 <task-summary> <H1> <H2> <H3> <H4> <H5>"}
 shift
 
-MIND_OS="mind-os"
+MIND_OS="mind-os-core"
 RATINGS_DIR="$MIND_OS/runtime/ratings"
 CURRENT="$RATINGS_DIR/current.md"
 PENDING="$RATINGS_DIR/.pending-ai-score"

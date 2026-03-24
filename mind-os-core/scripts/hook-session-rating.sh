@@ -16,7 +16,7 @@ if echo "$INPUT" | grep -q '"stop_hook_active"[[:space:]]*:[[:space:]]*true'; th
     exit 0
 fi
 
-MIND_OS="mind-os"
+MIND_OS="mind-os-core"
 RATINGS_DIR="$MIND_OS/runtime/ratings"
 CURRENT="$RATINGS_DIR/current.md"
 RUNTIME="$MIND_OS/runtime"

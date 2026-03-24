@@ -14,7 +14,7 @@ if echo "$INPUT" | grep -q '"stop_hook_active"[[:space:]]*:[[:space:]]*true'; th
     exit 0
 fi
 
-MIND_OS_DIR="mind-os"
+MIND_OS_DIR="mind-os-core"
 THINKING_DIR="$MIND_OS_DIR/runtime/thinking"
 
 # 检查是否有活跃的思考任务

@@ -3,7 +3,7 @@
 #
 # 扫描 runtime/thinking/ 找活跃任务，注入恢复提示
 
-MIND_OS_DIR="mind-os"
+MIND_OS_DIR="mind-os-core"
 THINKING_DIR="$MIND_OS_DIR/runtime/thinking"
 
 # 找活跃任务
