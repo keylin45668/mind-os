@@ -8,6 +8,55 @@
 
 ---
 
+## Pre-Boot：版本更新检查
+
+```
+① 读取本地版本
+  READ config.md → 提取 version 字段 → {local_version}
+
+② 获取远程版本（静默，失败不阻塞）
+  执行: curl -s --max-time 5 https://raw.githubusercontent.com/keylin45668/mind-os/main/mind-os/config.md
+  ├── 成功 → 提取 version 字段 → {remote_version}
+  └── 失败（网络不通/超时）→ 跳过检查，直接进入 Phase 0
+
+③ 比较版本
+  {remote_version} > {local_version}？
+  ├── 是 → 弹窗提示用户
+  └── 否（相等或本地更新）→ 跳过，直接进入 Phase 0
+```
+
+```yaml
+# 仅远程版本更新时弹出
+AskUserQuestion:
+  questions:
+    - question: "🔄 Mind OS 有新版本 v{remote_version}（当前 v{local_version}），是否更新？"
+      header: "版本更新"
+      multiSelect: false
+      options:
+        - label: "✅ 立即更新"
+          description: "从 GitHub 拉取最新版本"
+        - label: "⏭️ 跳过"
+          description: "使用当前版本继续启动"
+```
+
+```
+用户选"✅ 立即更新"：
+  执行: git -C mind-os/ pull origin main（或在 mind-os 所在目录执行 git pull）
+  ├── 成功 → "✅ 已更新到 v{remote_version}" → 重新读取 config.md → 进入 Phase 0
+  └── 失败（冲突等）→ "⚠️ 自动更新失败，请手动执行 git pull" → 继续启动当前版本
+
+用户选"⏭️ 跳过"：
+  → 直接进入 Phase 0
+```
+
+**设计原则：**
+- 网络失败静默跳过，不阻塞启动
+- curl 超时 5 秒，不影响启动体验
+- 只读远程 config.md 的 version 字段，不拉全部内容
+- 用户有选择权，不强制更新
+
+---
+
 ## Phase 0：读取配置 + 档案选择 + 数据检测
 
 ```
