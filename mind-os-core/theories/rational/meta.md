@@ -1,6 +1,6 @@
 # Theory Pack: rational — 按需加载路由表
 
-> 当前活跃模块：**21**（无预存上限，按需加载）
+> 当前活跃模块：**25**（无预存上限，按需加载）
 > **AI 启动时只读本文件，不加载任何子目录内容。任务进来后按关键词匹配加载。**
 
 ---
@@ -32,6 +32,10 @@
 | `/评分` | 会话结束/评分/质量 | review/session-audit.md → review/session-rating.md | **MUST_RUN** | 先执行审查再评分（串行） |
 | `/质量` | 质量循环/打磨/quality loop | think/quality-loop.md | MAY | 任务级质量迭代 |
 | `/深度迭代` | 深度迭代/多轮迭代/加速思考 | think/task-iterate.md | **MUST_RUN** | 任务级自动多轮迭代（蓝红N轮+收敛检测） |
+| `/创意` | 设计/创意/方案/产品/点子/命名/想个 | think/creative.md | SHOULD | 发散-收敛创造力引擎 |
+| `/执行` | 执行/计划/拆解/步骤/落地/OKR/行动方案 | organize/execute.md | SHOULD | 决策→行动桥梁（目标分解+第一步锚定） |
+| `/沟通` | 说服/谈判/汇报/沟通/表达/演讲/怎么说 | collaboration/communication.md | SHOULD | 受众分析+策略选择+预演 |
+| `/学习` | 学习/入门/提升/技能/怎么学/学习路径 | knowledge/learning.md | SHOULD | 费曼技巧+刻意练习+能力圈扩展 |
 
 ### 系统命令（非 theory 模块）
 
