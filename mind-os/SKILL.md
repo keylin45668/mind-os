@@ -1,7 +1,7 @@
 ---
 name: mind-os
 description: |
-  思维操作系统（Mind OS）——人机协作的认知框架。在每次会话开始时加载，为 AI 注入完整的思维管道：收集→分流→思考→决策→沉淀→回顾。包含认知偏差检查、多模型决策、反脆弱分析、系统动力学等理论模块，按需路由加载。适用于任何需要深度思考的场景：战略决策、投资判断、项目管理、人生规划。触发关键词：启动 Mind OS、思维系统、启动思维框架、mind os、认知框架、深度分析、系统思考。当用户说"启动"或"加载 Mind OS"时，必须使用此 skill。
+  思维操作系统（Mind OS v5.1）——人机协作的认知增强平台。为 AI 注入完整的思维管道：收集→分流→思考→决策→沉淀→回顾。包含认知偏差检查、红蓝对抗、反脆弱分析、系统动力学等 18 个理论模块，按需路由加载。支持项目连接器：给任何外部仓库装上 Mind OS 的脑子，说「帮我想清楚」即可启用深度分析。触发关键词：启动 Mind OS、思维系统、启动思维框架、mind os、认知框架、深度分析、系统思考、帮我想清楚。当用户说"启动"或"加载 Mind OS"时，必须使用此 skill。
 ---
 
 # Mind OS — Skill 入口
@@ -44,16 +44,17 @@ context = schema ⊕ theory ⊕ data
 ```
 mind-os/
 ├── SKILL.md          ← 你在这里（Skill 入口）
-├── BOOT.md           ← AI 启动协议（实际执行逻辑）
+├── BOOT.md           ← AI 启动协议（Phase 0-5）
 ├── config.md         ← 配置开关（schema/theory/data 路径）
-├── schemas/default/  ← 系统架构（7 文件）
-├── theories/rational/ ← 方法论模块（按需加载，26 文件）
-├── domains/          ← 领域专属规则
+├── schemas/default/  ← 系统架构（宪法 + 协作协议）
+├── theories/rational/ ← 方法论模块（18 条路由，按需加载）
+├── domains/          ← 领域专属规则（6 个领域）
+├── projects/         ← 项目连接器（给外部项目装脑子）
+├── autoevolve/       ← 自迭代引擎
 ├── data-template/    ← 首次安装用的空白数据模板
 ├── runtime/          ← 会话运行时状态
-└── examples/         ← 示例对话
-
-# 注：archive/（设计历史文档）不在分发包内，位于 mind-os/ 外部，仅开发者需要。
+├── scripts/          ← Claude Code Hooks 脚本
+└── tests/            ← 架构测试 + 引擎测试
 ```
 
 ## 注意事项

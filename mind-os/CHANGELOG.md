@@ -5,6 +5,86 @@
 
 ---
 
+## v5.1 — 2026-03-24 — 项目连接器：给任何仓库装脑子
+
+### 变更摘要
+
+- **项目连接器机制**（`projects/`）：一张卡片 = 一个连接，外部项目零改动即可接入 Mind OS 思考能力
+  - `projects/_router.md`：连接器路由表 + 卡片格式规范 + 桥接模板
+  - `projects/{id}.md`：连接器卡片（指定 repo 路径、keywords、context_files、theories、constraints）
+  - 运行时 Phase 5 新增 ①½ 步：domain 匹配后查项目连接器，自动加载项目上下文
+  - 启动面板新增「已接入项目」区块
+- **桥接协议**（`.mind-os.md`）：放在外部项目根目录，实现双向连接
+  - 会话启动时自动执行连接检测（读连接器 + 读 constitution → 输出连接状态）
+  - 触发词 `帮我想清楚` / `/think` → 激活 Mind OS 深度分析
+  - 分析完说"改" → 直接在项目内修改文件
+  - 未触发时 Mind OS 完全不介入，项目自身规则生效
+- **一句话安装器**（`projects/INSTALL.md`）：在任何项目目录说 `安装 mind-os`
+  - 自动探测 Mind OS 路径（或从 GitHub 克隆）
+  - 一轮对话（2 个问题）采集项目信息
+  - 自动生成 4 个文件：连接器卡片 + 桥接文件 + 更新入口文件 + 更新路由表
+  - 自动执行连接检测验证安装成功
+- **数据落盘规则**：明确项目连接器场景下的数据归属
+  - 项目文件改动 → 项目仓库
+  - 决策记录 → Mind OS runtime/decisions/
+  - 个人认知 → {data}/knowledge/notes/
+  - 思考过程 → 对话中输出（默认不落盘）
+
+### 新增/修改文件
+
+| 文件 | 变更 |
+|------|------|
+| projects/_router.md | 🆕 连接器路由表 + 机制说明 + 双向连接 + 桥接模板 |
+| projects/INSTALL.md | 🆕 一句话安装协议（5 步自动化） |
+| projects/zhidu-youhua.md | 🆕 首个连接器卡片示例（制度优化项目） |
+| BOOT.md | Phase 4 增加 projects/_router.md 并行读取；Phase 5 增加 ①½ 项目匹配步骤；启动面板增加「已接入项目」 |
+| domains/_router.md | 增加项目连接器说明 + 执行顺序更新 |
+| ../CLAUDE.md | 增加 `安装 mind-os` 触发入口 |
+| README.md | 全面重写：增加快速开始、核心能力、架构总览、项目连接器章节 |
+| SETUP.md | 增加方式 D：项目安装 |
+| SKILL.md | 更新文件结构图 |
+| DESIGN-NOTES.md | 增加 Layer 20：项目连接器设计推导 |
+| CHANGELOG.md | 本条目 |
+
+### 设计原则
+
+- **一张卡片一个连接**：零代码，纯 Markdown
+- **外部仓库零改动**（Mind OS 侧）：数据在那边，脑子在这边
+- **双向桥接**：Mind OS 能读项目数据，项目能调 Mind OS 能力
+- **谁的数据回谁家**：Mind OS 只存"想"的痕迹，不存"做"的结果
+
+### 升级指引
+
+- 新增 `projects/` 目录，无迁移需求
+- 已有项目接入：在项目目录说 `安装 mind-os` 即可
+- BOOT.md 变更向后兼容（无 projects/ 时跳过 ①½ 步）
+
+---
+
+## v5.0 — 2026-03-24 — 架构大升级：AutoEvolve + Hooks + 多档案 + 组织协作
+
+### 变更摘要
+
+- **AutoEvolve 持续迭代引擎**：模块级迭代 + 深度迭代 + 进度追踪
+  - `autoevolve/ENTRY.md`：统一迭代入口
+  - `autoevolve/module-evolve.md`：模块级迭代协议
+  - `/迭代`、`/模块迭代`、`/深度迭代` 命令路由
+- **多档案支持**：config.md 支持多个 data_profiles，启动时弹窗选择
+- **组织档案**：支持独立使用和团队协作两种模式，共享 org.md + members/ 结构
+- **会话审查系统**：session-audit.md 先审查再评分（串行 MUST_RUN）
+- **Hooks 安全性修复**：JSON 合法性、脚本安全性
+- **BOOT.md 重构**：支持个人/组织两种安装流程 + 命令路由 + 系统命令
+- **domains 扩展**：6 个领域全部建立 _rules.md
+- **版本号统一到 v5.0**
+
+### 升级指引
+
+- config.md 格式变更：`data:` 替换为 `data_profiles:` 列表
+- 已有用户需将 data 路径迁移到 data_profiles 格式
+- 新增 scripts/ 需要执行权限
+
+---
+
 ## v4.13 — 2026-03-24 — 输出文档模板（总纲+分章节） + 安全阀50轮
 
 ### 变更摘要

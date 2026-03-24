@@ -1,6 +1,6 @@
 # Theory Pack: rational — 按需加载路由表
 
-> 当前活跃模块：**17**（无预存上限，按需加载）
+> 当前活跃模块：**21**（无预存上限，按需加载）
 > **AI 启动时只读本文件，不加载任何子目录内容。任务进来后按关键词匹配加载。**
 
 ---
@@ -8,31 +8,75 @@
 ## 路由表
 
 > **执行级别**：MUST_RUN=匹配即执行不可跳过 | SHOULD=应执行跳过须声明 | MAY=可选参考
+> **命令触发**：用户输入 `/命令` 直接加载对应模块，跳过关键词匹配，执行级别强制为 MUST_RUN
 
-| 关键词 | 加载文件 | 执行级别 | 模块说明 |
-|--------|---------|---------|---------|
-| 收集/inbox/信息输入 | capture/rules.md | SHOULD | GTD收集规则 |
-| 分类/整理/归档 | organize/rules.md | SHOULD | PARA分流规则 |
-| 决策/判断/选择/要不要/该不该/值不值 | think/_index.md → 子路由 | **MUST_RUN** | 偏差检查（匹配即扫描） |
-| 帮我分析/深度思考/多方向/对比方案/利弊 | think/iterative-engine.md | **MUST_RUN** | 迭代引擎（必须跑红蓝对抗） |
-| 审计/迭代/系统检查 | think/system-audit-method.md | **MUST_RUN** | 方法A/B/C/D+深度追问 |
-| 紧急/优先级/排期 | decide/rules.md | SHOULD | 艾森豪威尔+反转思维 |
-| 风险/投资/反脆弱 | decide/antifragile.md | **MUST_RUN** | 三元分类+杠铃+否定法 |
-| 竞争/对手/市场/战略 | decide/competition.md | SHOULD | 五事七计+博弈+不战而胜 |
-| 模型/跨学科/格栅 | decide/models/meta.md | MAY | 多模型格栅 |
-| 回顾/复盘/总结 | review/rules.md | SHOULD | 日/周/月/季/年回顾 |
-| 笔记/知识/学习 | knowledge/rules.md | SHOULD | Zettelkasten+知识价值 |
-| 协作/分工/路由 | collaboration/rules.md | MAY | 任务路由+拓扑选择+权重 |
-| 系统/回路/陷阱/动力学 | collaboration/dynamics.md | MAY | 陷阱识别+创造性张力 |
-| 团队/学习/对话 | collaboration/learning-org.md | MAY | 深度汇谈+双环学习 |
-| 原则/评估/增益 | collaboration/principles.md | MAY | 五维评估+鲁棒性测试 |
-| 经济/成本/资本 | collaboration/economics.md | MAY | 比较优势+认知资本 |
-| 会话结束/评分/质量 | review/session-rating.md | **MUST_RUN** | 5维评分(AI×0.4+人×0.6)+滚动压缩 |
-| 质量循环/打磨/quality loop | think/quality-loop.md | MAY | 任务级质量迭代（由 Pre-Output Gate 自动触发，手动路由亦可） |
+| 命令 | 关键词（自动匹配） | 加载文件 | 执行级别 | 模块说明 |
+|------|--------|---------|---------|---------|
+| `/收集` | 收集/inbox/信息输入 | capture/rules.md | SHOULD | GTD收集规则 |
+| `/整理` | 分类/整理/归档 | organize/rules.md | SHOULD | PARA分流规则 |
+| `/偏差` | 决策/判断/选择/要不要/该不该/值不值 | think/_index.md → 子路由 | **MUST_RUN** | 偏差检查（匹配即扫描） |
+| `/分析` | 帮我分析/深度思考/多方向/对比方案/利弊 | think/iterative-engine.md | **MUST_RUN** | 迭代引擎（必须跑红蓝对抗） |
+| `/审计` | 审计/迭代/系统检查 | think/system-audit-method.md | **MUST_RUN** | 方法A/B/C/D+深度追问 |
+| `/排期` | 紧急/优先级/排期 | decide/rules.md | SHOULD | 艾森豪威尔+反转思维 |
+| `/反脆弱` | 风险/投资/反脆弱 | decide/antifragile.md | **MUST_RUN** | 三元分类+杠铃+否定法 |
+| `/竞争` | 竞争/对手/市场/战略 | decide/competition.md | SHOULD | 五事七计+博弈+不战而胜 |
+| `/模型` | 模型/跨学科/格栅 | decide/models/meta.md | MAY | 多模型格栅 |
+| `/回顾` | 回顾/复盘/总结 | review/rules.md | SHOULD | 日/周/月/季/年回顾 |
+| `/知识` | 笔记/知识/学习 | knowledge/rules.md | SHOULD | Zettelkasten+知识价值 |
+| `/协作` | 协作/分工/路由 | collaboration/rules.md | MAY | 任务路由+拓扑选择+权重 |
+| `/动力学` | 系统/回路/陷阱/动力学 | collaboration/dynamics.md | MAY | 陷阱识别+创造性张力 |
+| `/团队` | 团队/学习/对话 | collaboration/learning-org.md | MAY | 深度汇谈+双环学习 |
+| `/原则` | 原则/评估/增益 | collaboration/principles.md | MAY | 五维评估+鲁棒性测试 |
+| `/经济` | 经济/成本/资本 | collaboration/economics.md | MAY | 比较优势+认知资本 |
+| `/进化` | 进化/适应度/淘汰/分化 | collaboration/evolution.md | SHOULD | 模块适应度+淘汰归档+生态位分化 |
+| `/评分` | 会话结束/评分/质量 | review/session-audit.md → review/session-rating.md | **MUST_RUN** | 先执行审查再评分（串行） |
+| `/质量` | 质量循环/打磨/quality loop | think/quality-loop.md | MAY | 任务级质量迭代 |
+| `/深度迭代` | 深度迭代/多轮迭代/加速思考 | think/task-iterate.md | **MUST_RUN** | 任务级自动多轮迭代（蓝红N轮+收敛检测） |
+
+### 系统命令（非 theory 模块）
+
+| 命令 | 作用 | 说明 |
+|------|------|------|
+| `/理论` | 列出所有可用命令和模块说明 | 相当于 theory 帮助菜单 |
+| `/切换 {档案}` | 会话中切换数据档案 | 触发 BOOT.md 切换协议 |
+| `/焦点` | 查看/设置今日焦点 | 读写 runtime/focus.md |
+| `/面板` | 重新展示启动面板 | 刷新当前状态 |
+
+### 迭代命令
+
+| 命令 | 作用 | 说明 |
+|------|------|------|
+| `/迭代` | 跑一轮 autoevolve 系统迭代 | 读取 autoevolve/ENTRY.md 执行 |
+| `/迭代进度` | 查看 autoevolve 当前进度 | 读取 state.yaml 展示合规率 |
+| `/迭代聚焦 {场景}` | 指定下一轮迭代的目标场景 | 更新 state.yaml 的 next_action |
+| `/迭代暂停` | 暂停 autoevolve | state.yaml status → paused |
+| `/迭代继续` | 恢复 autoevolve | state.yaml status → running |
+| `/模块迭代 {模块名}` | 对单个 theory/schema 模块执行改进迭代 | 见模块迭代协议 |
+| `/模块列表` | 列出所有可迭代的模块及状态 | 扫描 theory/ + schema/ 文件 |
 
 ---
 
 ## 加载规则
+
+### 命令路由（优先级最高）
+
+```yaml
+command_routing:
+  触发: 用户输入以 / 开头
+  流程:
+    1. 在路由表"命令"列精确匹配
+    2. 匹配到 →
+       - 加载对应文件
+       - 执行级别强制为 MUST_RUN（用户主动触发 = 明确意图，无需意图验证）
+       - 跳过关键词匹配，直接进入门控
+    3. 未匹配到 → 提示："未找到命令 /{cmd}，输入 /理论 查看所有可用命令"
+  组合使用:
+    - "/反脆弱 分析一下这个投资机会" → 加载 antifragile.md，用户描述作为 input
+    - "/分析 + /反脆弱" → 同时加载两个模块（多命令空格分隔）
+    - 单独 "/反脆弱" 无后续描述 → AI 用 AskUserQuestion 询问要分析什么
+```
+
+### 关键词路由
 
 1. **单匹配**：只加载命中的文件
 2. **多匹配**：加载所有命中文件，**上限 3 个**（超过时只加载相关度最高的 3 个）
@@ -91,4 +135,4 @@
 
 ## 理论来源
 
-《思考，快与慢》/ 《穷查理宝典》/ 《反脆弱》/ 《黑天鹅》/ 《孙子兵法》/ 《道德经》/ 《系统之美》/ 《第五项修炼》/ 《原则》/ 《复杂》/ 《国富论》/ GTD / PARA / Zettelkasten / 延展心智论 / Licklider人机共生 / 博弈论 / 比较优势
+《思考，快与慢》/ 《穷查理宝典》/ 《反脆弱》/ 《黑天鹅》/ 《孙子兵法》/ 《道德经》/ 《系统之美》/ 《第五项修炼》/ 《原则》/ 《复杂》/ 《国富论》/ **《物种起源》** / GTD / PARA / Zettelkasten / 延展心智论 / Licklider人机共生 / 博弈论 / 比较优势

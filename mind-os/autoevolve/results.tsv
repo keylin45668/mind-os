@@ -48,3 +48,10 @@
 # S-SESSION-04: 99%  S-SESSION-05: 99%
 # Weighted 1000-session: ~990/1000
 # Distance to 999: 9
+# ── Evaluator v2 (73 items, 3 new scenario files) ──
+050	S-CMD-01,S-CMD-04,S-TITER-01,S-TITER-02,S-LIFE-01,S-LIFE-05,S-LIFE-08	992	FP-007(fixed),FP-008(fixed),FP-009(fixed)	evaluator v2 baseline: 7 new scenarios sampled, 3 gaps found+fixed	KEEP
+# ── Current Estimates (Evaluator v2) ──
+# Old scenarios: all at 99%
+# New scenarios (sampled): all at 99% after fixes
+# Weighted estimate: ~992/1000 (needs full regression to confirm)
+# New fatal checks: F06 G03 H01 H04

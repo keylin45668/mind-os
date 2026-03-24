@@ -15,6 +15,7 @@
 | 战略/竞争/市场 | strategy | domains/strategy/_rules.md | 对等协作 × 迭代 |
 | 写作/文档/报告 | writing | domains/writing/_rules.md | AI主导 × 串联 |
 | 家庭/孩子/健康 | personal | domains/personal/_rules.md | 人类主导 × 迭代 |
+| 切换档案/切换身份/换个身份/switch | （系统指令） | BOOT.md 会话中切换档案协议 | — |
 
 ---
 
@@ -40,8 +41,18 @@ no_match:
 
 ---
 
+## 项目连接器
+
+Domain 匹配后，还会查 `projects/_router.md` 匹配具体项目。项目连接器提供**上下文数据**，domain 提供**领域规则**，两者叠加。
+
+- 一个 domain 下可以挂多个 project（如 strategy 域下挂制度优化、竞品分析等多个项目）
+- project 不替代 domain，只补充具体项目的数据和约束
+- 详见 `projects/_router.md`
+
+---
+
 ## 注意
 
 - Domain 规则是对 theory/ 的补充，不替代 theory/
-- 执行顺序：先加载 theory/ 通用规则，再叠加 domain/ 专属规则
+- 执行顺序：先加载 theory/ 通用规则，再叠加 domain/ 专属规则，再叠加 project/ 上下文
 - Domain 规则与 theory/ 冲突时，domain/ 优先（更具体的规则覆盖通用规则）

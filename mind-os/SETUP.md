@@ -6,7 +6,7 @@
 
 ## 安装方式（选一种）
 
-### 方式 A：零操作自动启动（推荐，Claude Code / Cowork）
+### 方式 A：零操作自动启动（推荐首次使用）
 
 把整个项目文件夹（包含 `CLAUDE.md` 和 `mind-os/`）设为工作目录。
 
@@ -16,8 +16,8 @@
 
 | 你用的工具 | 怎么做 |
 |-----------|-------|
-| Claude Projects | 把 mind-os/ 添加为 Project Knowledge |
 | Claude Code / Cowork | 将 mind-os/ 所在目录设为工作目录 |
+| Claude Projects | 把 mind-os/ 添加为 Project Knowledge |
 | ChatGPT | 上传 mind-os/ 里的 BOOT.md 和 config.md |
 | 其他 AI | 确保 AI 能读取 mind-os/ 里的文件 |
 
@@ -31,29 +31,53 @@
 
 把 `mind-os/` 文件夹放到 Claude 的 Skills 目录下，系统会自动识别 `SKILL.md`。之后说"启动 Mind OS"即可触发。
 
+### 方式 D：给已有项目装脑子（v5.1 新增，推荐日常使用）
+
+在你的项目目录里，对 AI 说：
+
+```
+安装 mind-os ../mind-os
+```
+
+AI 自动完成：探测路径 → 问你 2 个问题 → 生成连接文件 → 验证连接。
+
+之后在项目里正常工作，需要深度思考时说**「帮我想清楚」**即可激活 Mind OS。
+
+详见 [projects/INSTALL.md](projects/INSTALL.md)。
+
 ---
 
 **无论哪种方式，AI 都会自动：**
-- 检测到首次使用
-- 创建你的个人数据目录
-- 用对话问你几个问题（名字、角色、价值观、沟通风格）
-- 帮你填好所有配置文件
-- 启动系统
+- 检测到首次使用 → 创建数据目录 → 用对话问你几个问题 → 填好配置 → 启动
+- 你不需要手动编辑任何文件
 
-你不需要手动编辑任何文件。
+---
+
+## 推荐使用方式
+
+```
+首次：方式 A 或 B → 完成身份配置 → 熟悉系统能力
+日常：方式 D → 在各个项目中直接使用，说"帮我想清楚"触发深度分析
+```
 
 ---
 
 ## 常见问题
 
 **Q: config.md 里的 data 路径要改吗？**
-A: 默认路径是 mind-os/ 同级的 `../data`。如果你想放别的位置，改 config.md 里的 `data:` 一行。不改也能用。
+A: 默认路径是 mind-os/ 同级的 `../data`。不改也能用。
 
 **Q: 我不懂技术，能用吗？**
 A: 能。你只需要会和 AI 对话。
 
 **Q: 给别人用怎么办？**
-A: 把 mind-os/ 文件夹发给他，让他从 Step 1 开始。你的数据在 data/ 里，不在 mind-os/ 里，不会被带走。
+A: 把 mind-os/ 文件夹发给他。你的数据在 data/ 里，不会被带走。
 
 **Q: 想换一套方法论？**
-A: 改 config.md 里的 `theory:` 一行。详见 theories/rational/README.md。
+A: 改 config.md 里的 `theory:` 一行。
+
+**Q: 怎么给多个项目装脑子？**
+A: 每个项目目录里说一次 `安装 mind-os`。每个项目独立连接，互不影响。
+
+**Q: 项目连接器会改我的项目文件吗？**
+A: 只会新增一个 `.mind-os.md` 桥接文件，并在 CLAUDE.md/AGENTS.md 末尾加一行。不碰你的业务文件。

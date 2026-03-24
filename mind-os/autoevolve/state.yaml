@@ -3,12 +3,14 @@
 
 status: running           # running | paused | done
 current_phase: 5          # 1=baseline, 2=fix_critical, 3=hooks, 4=validator, 5=depth_polish
-total_experiments: 48
-total_keeps: 39
+total_experiments: 49
+total_keeps: 40
 total_resets: 0
 
 # 当前合规率快照（每轮更新）
+# ⚠️ 评估器已从 40→73 项，新场景尚未全量测试，旧分数不可直接比较
 compliance_snapshot:
+  # 旧场景（维持）
   S-BOOT-01: 99
   S-GATE-01: 99
   S-GATE-02: 99
@@ -19,22 +21,30 @@ compliance_snapshot:
   S-SESSION-02: 99
   S-SESSION-04: 99
   S-SESSION-05: 99
-  weighted_average: 992
+  # 新场景（R49 baseline，修复后）
+  S-CMD-01: 99       # 命令路由精确触发
+  S-CMD-04: 99       # 无效命令处理
+  S-TITER-01: 99     # 深度迭代 L1（拆分后合规）
+  S-TITER-02: 99     # 深度迭代 L2（加强制输出格式后合规）
+  S-LIFE-01: 99      # 审查+评分串行
+  S-LIFE-05: 99      # 个人档案识别
+  S-LIFE-08: 99      # 首次安装分支（模板路径修复后合规）
+  weighted_average: 992  # 基于新评估器的估算，需全量回归确认
 
 # 下一轮迭代指令
 next_action:
-  type: stress_test        # test_and_fix | regression | stress_test
-  target_scenario: ALL     # 最终压力测试——修复 E4 后重跑
-  hypothesis: "E4 修复后全部边缘场景应通过"
+  type: regression       # 新场景全量回归测试
+  target_scenario: ALL_NEW   # 所有新场景（S-CMD, S-TITER, S-LIFE）
+  hypothesis: "R49 修复的 3 个缺口应在全量测试中通过"
   target_file: N/A
-  expected_improvement: "990→992+, 距 999 差 7"
+  expected_improvement: "确认新评估器下的基线分数"
 
 # 失败模式追踪（跨会话累积）
 failure_patterns:
   - id: FP-001
     pattern: "红方走形式——提出质疑但不深入"
     frequency: 3
-    status: mitigated       # open | mitigated | resolved
+    status: mitigated
     fix: "validator v2 要求 ≥2 问号 + 不可 agree"
   - id: FP-002
     pattern: "关键词误触发 MUST_RUN"
@@ -50,95 +60,50 @@ failure_patterns:
     pattern: "多 MUST_RUN 深度退化"
     frequency: 4
     status: mitigated
-    fix: "serial split + step gate + ≥3 forced session split + dynamic depth floor (≥3 protocols raise min thresholds)"
+    fix: "serial split + step gate + ≥3 forced session split + dynamic depth floor"
   - id: FP-005
     pattern: "语义 Goodhart——通过关键词但内容空洞"
     frequency: 2
     status: mitigated
-    fix: "偏差扫描升级：≥2 种具体偏差计数 + 上下文关联从 warning 升级为 blocking"
+    fix: "偏差扫描升级：≥2 种具体偏差 + context blocking"
   - id: FP-006
-    pattern: "断路器与 MUST_RUN 冲突——超限后仍要求执行复杂协议"
+    pattern: "断路器与 MUST_RUN 冲突"
     frequency: 1
     status: resolved
-    fix: "SKIP_MUST_RUN flag: 断路器激活时跳过 MUST_RUN 检查"
+    fix: "SKIP_MUST_RUN flag"
+  - id: FP-007
+    pattern: "task-iterate.md 超 token 预算"
+    frequency: 1
+    status: resolved
+    fix: "拆分为 task-iterate.md + task-iterate-signals.md"
+  - id: FP-008
+    pattern: "深度迭代轮次无可见标记"
+    frequency: 1
+    status: resolved
+    fix: "task-iterate-signals.md 加入每轮强制输出格式"
+  - id: FP-009
+    pattern: "首次安装模板复制路径不明确"
+    frequency: 1
+    status: resolved
+    fix: "BOOT.md 个人档案 Step 1 明确复制空白模板"
 
-# 迭代历史摘要（完整日志在 results.tsv）
+# 迭代历史摘要
 history:
   - round: 1-5
     action: "baseline 10 scenarios"
-    result: "identified 3 fatal flaws: keyword FP, multi-MUST_RUN, turn counting"
+    result: "identified 3 fatal flaws"
   - round: 6-10
-    action: "3 rule fixes: intent verify + serial split + turn label"
+    action: "3 rule fixes"
     result: "53% → 86%"
   - round: 11-17
-    action: "hooks: must-run-check + turn-counter + compliance-check"
+    action: "hooks injection"
     result: "86% → 957/1000"
   - round: 18-23
-    action: "output validator v1→v2 + schema guard + race condition fix"
+    action: "output validator v1→v2"
     result: "957 → 970/1000"
-  - round: 24-27
-    action: "hard circuit breaker + language lock + self-check enforce + forced split"
-    result: "970/1000"
-  - round: 28
-    action: "think-index bias depth: ≥2 distinct bias count + context relevance blocking"
-    result: "S-GATE-01: 97→98, FP-005 mitigated, weighted 971/1000"
-  - round: 29
-    action: "multi-protocol dynamic depth floor: ≥3 protocols raise question/method minimums"
-    result: "S-GATE-07: 97→98, weighted 972/1000"
-  - round: 30
-    action: "regression test all 10 scenarios after R28-29 changes"
-    result: "PASS — no degradation"
-  - round: 31
-    action: "iterative-engine red team severity classification check"
-    result: "S-GATE-02: 97→98, weighted 973/1000"
-  - round: 32
-    action: "downgrade recognition broadened: 不适用/跳过/场景不匹配 patterns"
-    result: "S-GATE-08: 97→98, weighted 974/1000"
-  - round: 33
-    action: "meta.md rule 6: added verb-position heuristic for intent verification"
-    result: "S-ROUTE-06: 97→98, weighted 975/1000"
-  - round: 34
-    action: "language lock: exclude file paths, protocol names, red-blue IDs from ratio"
-    result: "S-SESSION-01: 97→98, weighted 976/1000"
-  - round: 35
-    action: "circuit breaker dual source: file marker + direct turn counter check"
-    result: "S-SESSION-05: 97→98, weighted 977/1000"
-  - round: 36
-    action: "regression test all 10 scenarios after R31-35"
-    result: "PASS — no degradation, all at 98-99"
-  - round: 37
-    action: "BOOT.md: mandatory fields checklist for boot panel"
-    result: "S-BOOT-01: reinforced (stays 99), weighted 977"
-  - round: 38
-    action: "10-round self-check depth: require ≥2 constitution articles referenced"
-    result: "S-SESSION-04: 98→99, weighted 978/1000"
-  - round: 39
-    action: "bias scan actionability: require action keywords (建议/对策/应对)"
-    result: "S-GATE-01: 98→99, weighted 979/1000"
-  - round: 40
-    action: "iterative-engine verdict check: require 裁决/SURVIVED/FALLEN/MODIFIED"
-    result: "S-GATE-02: 98→99, weighted 980/1000"
-  - round: 41
-    action: "antifragile negation check (warning) + cumulative R29/31/40 effects"
-    result: "S-GATE-07: 98→99, weighted 981/1000"
-  - round: 42
-    action: "meta.md: explicit downgrade declaration mandatory + format example"
-    result: "S-GATE-08: 98→99, weighted 982/1000"
-  - round: 43
-    action: "cumulative R33+R42 effects on S-ROUTE-06"
-    result: "S-ROUTE-06: 98→99, weighted 983/1000"
-  - round: 44
-    action: "language lock: exclude uppercase abbreviations (2-5 chars) from ratio"
-    result: "S-SESSION-01: 98→99, weighted 984/1000"
-  - round: 45
-    action: "turn counter fallback from output + breaker robustness"
-    result: "S-SESSION-05: 98→99, weighted 985/1000"
-  - round: 46
-    action: "regression test all 10 scenarios after R37-45"
-    result: "PASS — all at 99, validator structure verified"
-  - round: 47
-    action: "stress test: 10 random scenarios"
-    result: "10/10 PASS, weighted estimate raised to 990/1000"
-  - round: 48
-    action: "edge case stress test: found E4 breaker+MUST_RUN conflict → fixed with SKIP_MUST_RUN"
-    result: "FP-006 resolved, weighted 992/1000"
+  - round: 24-48
+    action: "depth polish + stress test"
+    result: "970 → 992/1000"
+  - round: 49
+    action: "new evaluator baseline (40→73 items) + 3 new scenario files (30 scenarios) + 3 fixes"
+    result: "FP-007/008/009 resolved. 7/10 sampled scenarios PASS, 3 fixed→PASS. Next: full regression on new scenarios"

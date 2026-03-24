@@ -55,15 +55,61 @@ rating_flow:
     权重: 0.4
 
   step_2_human_score:        # 人类评分（不可替代）
-    方法: 向用户展示 5 个维度，每个打 1-5 分
+    方法: 通过 AskUserQuestion 逐维度点击评分（与系统所有交互点保持一致）
     格式: |
-      本次会话评分（每项 1-5，直接输入数字，如 "4 3 5 4 5"）：
-      1. 任务完成度:
-      2. 分析深度:
-      3. 协议合规:
-      4. 效率:
-      5. 可行动性:
-      （输入 skip 跳过人类评分）
+      分两轮 AskUserQuestion 弹出（每轮最多 4 题）：
+
+      第 1 轮（3 个维度）：
+      AskUserQuestion:
+        questions:
+          - question: "D1 任务完成度 — 核心诉求是否被解决？"
+            header: "完成度"
+            multiSelect: false
+            options:
+              - label: "⭐⭐⭐⭐⭐ 完全解决，超出预期"
+              - label: "⭐⭐⭐⭐ 基本解决"
+              - label: "⭐⭐⭐ 部分解决，有遗留"
+              - label: "⭐⭐ 解决不多 / ⭐ 完全没解决"
+          - question: "D2 分析深度 — 是否触及本源，还是在套框架？"
+            header: "深度"
+            multiSelect: false
+            options:
+              - label: "⭐⭐⭐⭐⭐ 直击本源"
+              - label: "⭐⭐⭐⭐ 有深度"
+              - label: "⭐⭐⭐ 部分触及，有表面成分"
+              - label: "⭐⭐ 较浅 / ⭐ 纯套框架"
+          - question: "D3 协议合规 — 系统协议是否被正确执行？"
+            header: "合规"
+            multiSelect: false
+            options:
+              - label: "⭐⭐⭐⭐⭐ 严格执行，有实质产出"
+              - label: "⭐⭐⭐⭐ 基本到位"
+              - label: "⭐⭐⭐ 执行了但走形式"
+              - label: "⭐⭐ 有遗漏 / ⭐ 跳过了 MUST_RUN"
+
+      第 2 轮（2 个维度）：
+      AskUserQuestion:
+        questions:
+          - question: "D4 效率 — 是否简洁直接，不绕弯？"
+            header: "效率"
+            multiSelect: false
+            options:
+              - label: "⭐⭐⭐⭐⭐ 简洁精准，无废话"
+              - label: "⭐⭐⭐⭐ 比较高效"
+              - label: "⭐⭐⭐ 基本聚焦，有冗余"
+              - label: "⭐⭐ 偏冗长 / ⭐ 跑偏了"
+          - question: "D5 可行动性 — 结论是否可直接执行？"
+            header: "可行动"
+            multiSelect: false
+            options:
+              - label: "⭐⭐⭐⭐⭐ 明确下一步 + 验收标准"
+              - label: "⭐⭐⭐⭐ 可执行"
+              - label: "⭐⭐⭐ 有方向但缺细节"
+              - label: "⭐⭐ 较空泛 / ⭐ 纯建议"
+
+      星级映射: ⭐⭐⭐⭐⭐=5, ⭐⭐⭐⭐=4, ⭐⭐⭐=3, ⭐⭐=2, ⭐=1
+      用户选"其他"可输入精确分数（1-5，支持小数）
+      用户选"其他"输入 skip → 跳过人类评分
     权重: 0.6
 
   step_3_final:              # 加权计算

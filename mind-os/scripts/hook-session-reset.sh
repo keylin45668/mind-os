@@ -9,9 +9,15 @@ USER_MSG=$(echo "$INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); 
            echo "$INPUT" | grep -o '"user_prompt"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*: *"//;s/"$//')
 [ -z "$USER_MSG" ] && USER_MSG=$(echo "$INPUT" | grep -o '"message"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*: *"//;s/"$//')
 
+# 使用与 turn-counter 相同的会话标识
+SESSION_ID="${CLAUDE_SESSION_ID:-$PPID}"
+COUNTER_DIR="mind-os/runtime/sessions"
+COUNTER_FILE="${COUNTER_DIR}/.turn-counter-${SESSION_ID}"
+
 # 检测启动信号
 if echo "$USER_MSG" | grep -qiE '启动.*Mind.*OS|Mind.*OS.*启动|BOOT|重新启动'; then
-    echo "0" > "mind-os/runtime/.turn-counter"
+    mkdir -p "$COUNTER_DIR"
+    echo "0" > "$COUNTER_FILE"
     echo "🔄 轮次计数器已重置（检测到启动信号）"
 fi
 

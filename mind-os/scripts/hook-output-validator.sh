@@ -11,7 +11,9 @@
 
 INPUT=$(cat)
 MARKER_FILE="mind-os/runtime/.must-run-active"
-COUNTER_FILE="mind-os/runtime/.turn-counter"
+# Per-session 计数器和断路器
+SESSION_ID="${CLAUDE_SESSION_ID:-$PPID}"
+COUNTER_FILE="mind-os/runtime/sessions/.turn-counter-${SESSION_ID}"
 
 # 防无限循环
 if echo "$INPUT" | grep -q '"validator_hook_active"[[:space:]]*:[[:space:]]*true'; then
@@ -28,13 +30,8 @@ WARNINGS=""
 # Layer 3: 流程完整性（每次都检查）
 # ══════════════════════════════════════════════════
 
-# 检查轮次标记（双重来源：文件 + 输出中的轮次标记）
+# 轮次来源：per-session 计数器文件（唯一权威来源，不从 AI 输出文本提取以避免误读讨论内容）
 TURN=$(cat "$COUNTER_FILE" 2>/dev/null || echo "0")
-# 后备：从 AI 输出中提取轮次（如 [轮次 25/20]）
-OUTPUT_TURN=$(echo "$INPUT" | grep -oE '轮次[[:space:]]*[0-9]+' | grep -oE '[0-9]+' | head -1)
-if [ -n "$OUTPUT_TURN" ] && [ "$OUTPUT_TURN" -gt "$TURN" ] 2>/dev/null; then
-    TURN="$OUTPUT_TURN"
-fi
 if [ "$TURN" -gt 2 ]; then
     if ! echo "$INPUT" | grep -qE '轮次|turn'; then
         WARNINGS="${WARNINGS}
@@ -61,36 +58,8 @@ if [ "$TURN" -gt 0 ] && [ $((TURN % 10)) -eq 0 ]; then
     fi
 fi
 
-# 硬性断路器检查（双重来源：文件标记 + turn counter 直接检测）
-BREAKER_FILE="mind-os/runtime/.circuit-breaker-active"
-BREAKER_ACTIVE=false
-if [ -f "$BREAKER_FILE" ]; then
-    BREAKER_ACTIVE=true
-fi
-# 即使文件不存在，也直接检查 turn counter 是否超限
-SESSION_LIMIT=""
-for PREF_PATH in "../data/identity/preferences.md" "mind-os/data-template/identity/preferences.md"; do
-    if [ -f "$PREF_PATH" ]; then
-        SESSION_LIMIT=$(grep 'session_length_limit:' "$PREF_PATH" 2>/dev/null | sed 's/.*session_length_limit:[[:space:]]*//' | head -1)
-        break
-    fi
-done
-if [ -n "$SESSION_LIMIT" ] && [ "$TURN" -ge "$SESSION_LIMIT" ]; then
-    BREAKER_ACTIVE=true
-fi
+# 断路器已移除 — 架构以文件为基准，不限制会话轮次
 SKIP_MUST_RUN=false
-if [ "$BREAKER_ACTIVE" = true ]; then
-    if ! echo "$INPUT" | grep -qE '会话已达上限|新建会话|会话终止|session.limit|超过.*轮|建议.*新会话'; then
-        ISSUES="${ISSUES}
-❌ [断路器] 会话已超限（轮次 ${TURN}，限制 ${SESSION_LIMIT}）但未包含终止声明（必须提醒用户新建会话）"
-    fi
-    # 断路器激活时跳过 MUST_RUN 检查（超限后不应执行新的复杂协议）
-    SKIP_MUST_RUN=true
-    # 通过后清除文件标记
-    if [ -z "$ISSUES" ] || ! echo "$ISSUES" | grep -q '断路器'; then
-        rm -f "$BREAKER_FILE"
-    fi
-fi
 
 # 检查语言锁定
 # 读取 preferences 中的 language 设置
