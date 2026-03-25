@@ -53,6 +53,7 @@
 # ── Evaluator v3 (83 items, sentinel scenarios added) ──
 051	S-SENT-01~13	993	FP-010(fixed),FP-011(fixed)	sentinel baseline: 13 scenarios, 2 gaps found+fixed (confirmation step + partial module handling)	KEEP
 052	S-SENT-STRESS	994	FP-012(fixed)	sentinel stress test: 10 random, 9 direct PASS, 1 edge (multi-scene merge) fixed	KEEP
+053	ALL(31)	994	-	全量回归：31 场景无退化	PASS
 # ── Current Estimates (Evaluator v3) ──
 # Old scenarios: all at 99%
 # New scenarios (CMD/TITER/LIFE): all at 99% after fixes

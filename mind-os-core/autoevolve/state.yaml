@@ -3,7 +3,7 @@
 
 status: running           # running | paused | done
 current_phase: 5          # 1=baseline, 2=fix_critical, 3=hooks, 4=validator, 5=depth_polish
-total_experiments: 51
+total_experiments: 52
 total_keeps: 42
 total_resets: 0
 
@@ -43,15 +43,15 @@ compliance_snapshot:
   S-SENT-11: 99       # BOOT 后不触发结束建议
   S-SENT-12: 99       # .mind-os.md 检测
   S-SENT-13: 99       # 已评分不再提醒
-  weighted_average: 994  # stress test 9/10 直接通过，1 边界 case 修复后通过
+  weighted_average: 994  # 全量回归确认，无退化
 
 # 下一轮迭代指令
 next_action:
-  type: regression
-  target_scenario: ALL  # 全量回归（旧场景 + 新场景 + sentinel）
-  hypothesis: "sentinel 多场景合并规则不影响其他场景"
+  type: stress_test
+  target_scenario: ALL  # 全系统压力测试（含 sentinel）
+  hypothesis: "全系统合规率稳定在 994+"
   target_file: N/A
-  expected_improvement: "确认全量无退化"
+  expected_improvement: "确认整体稳定性"
 
 # 失败模式追踪（跨会话累积）
 failure_patterns:
@@ -142,3 +142,6 @@ history:
   - round: 51
     action: "sentinel stress test — 10 random scenarios"
     result: "9/10 PASS, 1 edge case (multi-scene merge) fixed (FP-012). weighted_average: 993→994"
+  - round: 52
+    action: "全量回归测试 — 31 场景"
+    result: "PASS，无退化。weighted_average: 994 稳定"
