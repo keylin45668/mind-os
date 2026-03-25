@@ -3,12 +3,12 @@
 
 status: running           # running | paused | done
 current_phase: 5          # 1=baseline, 2=fix_critical, 3=hooks, 4=validator, 5=depth_polish
-total_experiments: 49
-total_keeps: 40
+total_experiments: 50
+total_keeps: 41
 total_resets: 0
 
 # 当前合规率快照（每轮更新）
-# ⚠️ 评估器已从 40→73 项，新场景尚未全量测试，旧分数不可直接比较
+# ⚠️ 评估器已从 73→83 项（新增 I 类 sentinel 10 项），新场景需全量测试
 compliance_snapshot:
   # 旧场景（维持）
   S-BOOT-01: 99
@@ -21,23 +21,37 @@ compliance_snapshot:
   S-SESSION-02: 99
   S-SESSION-04: 99
   S-SESSION-05: 99
-  # 新场景（R49 baseline，修复后）
-  S-CMD-01: 99       # 命令路由精确触发
-  S-CMD-04: 99       # 无效命令处理
-  S-TITER-01: 99     # 深度迭代 L1（拆分后合规）
-  S-TITER-02: 99     # 深度迭代 L2（加强制输出格式后合规）
-  S-LIFE-01: 99      # 审查+评分串行
-  S-LIFE-05: 99      # 个人档案识别
-  S-LIFE-08: 99      # 首次安装分支（模板路径修复后合规）
-  weighted_average: 992  # 基于新评估器的估算，需全量回归确认
+  # 新场景（R49）
+  S-CMD-01: 99
+  S-CMD-04: 99
+  S-TITER-01: 99
+  S-TITER-02: 99
+  S-LIFE-01: 99
+  S-LIFE-05: 99
+  S-LIFE-08: 99
+  # Sentinel 场景（R50 baseline + fix）
+  S-SENT-01: 99       # 关键词+句式触发
+  S-SENT-02: 99       # 仅句式触发
+  S-SENT-03: 99       # BOOT 后停用
+  S-SENT-04: 99       # 7 场景关键词覆盖
+  S-SENT-05: 99       # 确认后走 meta.md（修复后）
+  S-SENT-06: 99       # 拒绝后静默
+  S-SENT-07: 99       # 全局静默
+  S-SENT-08: 99       # 恢复建议
+  S-SENT-09: 99       # 已加载不重复（修复后）
+  S-SENT-10: 99       # 会话结束建议评分
+  S-SENT-11: 99       # BOOT 后不触发结束建议
+  S-SENT-12: 99       # .mind-os.md 检测
+  S-SENT-13: 99       # 已评分不再提醒
+  weighted_average: 993  # 新增 13 场景全通过，但需实际会话验证
 
 # 下一轮迭代指令
 next_action:
-  type: regression       # 新场景全量回归测试
-  target_scenario: ALL_NEW   # 所有新场景（S-CMD, S-TITER, S-LIFE）
-  hypothesis: "R49 修复的 3 个缺口应在全量测试中通过"
-  target_file: N/A
-  expected_improvement: "确认新评估器下的基线分数"
+  type: stress_test
+  target_scenario: ALL_SENT  # 连续模拟 10 个随机 sentinel 场景
+  hypothesis: "sentinel 协议在实际 AI 会话中能正确触发和抑制"
+  target_file: mind-os-core/sentinel.md
+  expected_improvement: "确认 sentinel 在实战中的合规率"
 
 # 失败模式追踪（跨会话累积）
 failure_patterns:
@@ -86,6 +100,16 @@ failure_patterns:
     frequency: 1
     status: resolved
     fix: "BOOT.md 个人档案 Step 1 明确复制空白模板"
+  - id: FP-010
+    pattern: "sentinel 用户确认后衔接步骤缺失"
+    frequency: 1
+    status: resolved
+    fix: "sentinel.md 新增'用户确认后'段落，明确走 meta.md 路由"
+  - id: FP-011
+    pattern: "sentinel 部分模块已加载时建议策略不明"
+    frequency: 1
+    status: resolved
+    fix: "sentinel.md 抑制规则补充：部分已加载时只建议未加载部分"
 
 # 迭代历史摘要
 history:
@@ -106,4 +130,7 @@ history:
     result: "970 → 992/1000"
   - round: 49
     action: "new evaluator baseline (40→73 items) + 3 new scenario files (30 scenarios) + 3 fixes"
-    result: "FP-007/008/009 resolved. 7/10 sampled scenarios PASS, 3 fixed→PASS. Next: full regression on new scenarios"
+    result: "FP-007/008/009 resolved. 7/10 sampled scenarios PASS, 3 fixed→PASS"
+  - round: 50
+    action: "sentinel protocol baseline (73→83 items) + 13 new scenarios (S-SENT) + 2 fixes"
+    result: "FP-010/011 resolved. 13/13 scenarios PASS after fix. weighted_average: 992→993"
