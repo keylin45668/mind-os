@@ -8,6 +8,15 @@
 
 ## AI 执行协议（每轮必须严格按此执行）
 
+### Step 0：网络同步（可选，≤30秒）
+
+```
+IF state.yaml 中 network.sync_enabled == true:
+  READ autoevolve/network-sync.md → 执行 Step 0-A（远程同步）
+ELSE:
+  跳过（默认行为）
+```
+
 ### Step 1：读取状态（30秒）
 
 ```
@@ -37,6 +46,7 @@ READ autoevolve/program.md        ← 人类方向（不可变）
 4. 用 evaluator.md 的检查清单自评（作为 evaluator）
 5. 如果发现失败项：
    a. 分析根因
+   a-1. [可选] 若 network.web_search_enabled == true → 读 network-sync.md Step 2-N 执行网络增强分析
    b. 提出修改（修改 next_action.target_file）
    c. 执行修改
    d. 重新模拟验证
@@ -90,6 +100,15 @@ AutoEvolve Round #{N} 完成
 ═══════════════════════════════════════
 
 然后结束会话。不要继续其他工作。
+```
+
+### Step 5：网络备份（可选，≤15秒）
+
+```
+IF state.yaml 中 network.backup_enabled == true:
+  READ autoevolve/network-sync.md → 执行 Step 5-B（结果远程备份）
+ELSE:
+  跳过（默认行为）
 ```
 
 ---

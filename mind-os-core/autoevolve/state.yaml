@@ -107,3 +107,15 @@ history:
   - round: 49
     action: "new evaluator baseline (40→73 items) + 3 new scenario files (30 scenarios) + 3 fixes"
     result: "FP-007/008/009 resolved. 7/10 sampled scenarios PASS, 3 fixed→PASS. Next: full regression on new scenarios"
+
+# 网络状态（可选功能，默认全部关闭）
+network:
+  sync_enabled: false
+  web_search_enabled: false
+  backup_enabled: false
+  last_sync_round: 0
+  last_sync_result: "n/a"
+  last_sync_diff: []
+  last_backup_round: 0
+  last_backup_result: "n/a"
+  last_web_search_round: 0
