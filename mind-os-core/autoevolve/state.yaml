@@ -3,8 +3,8 @@
 
 status: running           # running | paused | done
 current_phase: 5          # 1=baseline, 2=fix_critical, 3=hooks, 4=validator, 5=depth_polish
-total_experiments: 50
-total_keeps: 41
+total_experiments: 51
+total_keeps: 42
 total_resets: 0
 
 # 当前合规率快照（每轮更新）
@@ -43,15 +43,15 @@ compliance_snapshot:
   S-SENT-11: 99       # BOOT 后不触发结束建议
   S-SENT-12: 99       # .mind-os.md 检测
   S-SENT-13: 99       # 已评分不再提醒
-  weighted_average: 993  # 新增 13 场景全通过，但需实际会话验证
+  weighted_average: 994  # stress test 9/10 直接通过，1 边界 case 修复后通过
 
 # 下一轮迭代指令
 next_action:
-  type: stress_test
-  target_scenario: ALL_SENT  # 连续模拟 10 个随机 sentinel 场景
-  hypothesis: "sentinel 协议在实际 AI 会话中能正确触发和抑制"
-  target_file: mind-os-core/sentinel.md
-  expected_improvement: "确认 sentinel 在实战中的合规率"
+  type: regression
+  target_scenario: ALL  # 全量回归（旧场景 + 新场景 + sentinel）
+  hypothesis: "sentinel 多场景合并规则不影响其他场景"
+  target_file: N/A
+  expected_improvement: "确认全量无退化"
 
 # 失败模式追踪（跨会话累积）
 failure_patterns:
@@ -110,6 +110,11 @@ failure_patterns:
     frequency: 1
     status: resolved
     fix: "sentinel.md 抑制规则补充：部分已加载时只建议未加载部分"
+  - id: FP-012
+    pattern: "sentinel 多场景同时命中无合并规则"
+    frequency: 1
+    status: resolved
+    fix: "sentinel.md 匹配规则补充：多场景命中时合并建议模块（去重，≤3）"
 
 # 迭代历史摘要
 history:
@@ -134,3 +139,6 @@ history:
   - round: 50
     action: "sentinel protocol baseline (73→83 items) + 13 new scenarios (S-SENT) + 2 fixes"
     result: "FP-010/011 resolved. 13/13 scenarios PASS after fix. weighted_average: 992→993"
+  - round: 51
+    action: "sentinel stress test — 10 random scenarios"
+    result: "9/10 PASS, 1 edge case (multi-scene merge) fixed (FP-012). weighted_average: 993→994"

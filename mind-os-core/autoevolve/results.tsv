@@ -52,6 +52,7 @@
 050	S-CMD-01,S-CMD-04,S-TITER-01,S-TITER-02,S-LIFE-01,S-LIFE-05,S-LIFE-08	992	FP-007(fixed),FP-008(fixed),FP-009(fixed)	evaluator v2 baseline: 7 new scenarios sampled, 3 gaps found+fixed	KEEP
 # ── Evaluator v3 (83 items, sentinel scenarios added) ──
 051	S-SENT-01~13	993	FP-010(fixed),FP-011(fixed)	sentinel baseline: 13 scenarios, 2 gaps found+fixed (confirmation step + partial module handling)	KEEP
+052	S-SENT-STRESS	994	FP-012(fixed)	sentinel stress test: 10 random, 9 direct PASS, 1 edge (multi-scene merge) fixed	KEEP
 # ── Current Estimates (Evaluator v3) ──
 # Old scenarios: all at 99%
 # New scenarios (CMD/TITER/LIFE): all at 99% after fixes
