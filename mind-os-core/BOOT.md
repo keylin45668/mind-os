@@ -510,6 +510,7 @@ collaborative: true/false    # true=团队协作，false=独立使用
 ```
 并行读取：
   READ {theory}/meta.md
+  READ mind-os-core/sentinel.md          ← 新增：意图检测协议
   READ domains/_router.md
   READ projects/_router.md        ← 项目连接器路由机制说明
   SCAN local/projects/*.md        ← 扫描所有个人项目连接器，动态构建路由表
@@ -520,7 +521,7 @@ collaborative: true/false    # true=团队协作，false=独立使用
 > **项目连接器分层**：`projects/_router.md` 定义路由机制，`local/projects/*.md` 存放个人连接器卡片。
 > 启动时扫描 `local/projects/` 下所有 `.md` 文件，读取每个卡片的 `keywords` 字段，动态构建路由表。
 
-**Phase 1-4 全部并行读取，总共 8+ 个文件（取决于连接器数量）。**
+**Phase 1-4 全部并行读取，总共 9+ 个文件（取决于连接器数量）。**
 
 ### 焦点日期处理（Phase 4 完成后立即执行）
 
