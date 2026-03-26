@@ -1,6 +1,6 @@
 # Theory Pack: rational — 按需加载路由表
 
-> 当前活跃模块：**26**（无预存上限，按需加载）
+> 当前活跃模块：**29**（无预存上限，按需加载）
 > **AI 启动时只读本文件，不加载任何子目录内容。任务进来后按关键词匹配加载。**
 
 ---
@@ -37,6 +37,9 @@
 | `/执行` | 执行/计划/拆解/步骤/落地/OKR/行动方案 | organize/execute.md | SHOULD | 决策→行动桥梁（目标分解+第一步锚定） |
 | `/沟通` | 说服/谈判/汇报/沟通/表达/演讲/怎么说 | collaboration/communication.md | SHOULD | 受众分析+策略选择+预演 |
 | `/学习` | 学习/入门/提升/技能/怎么学/学习路径 | knowledge/learning.md | SHOULD | 费曼技巧+刻意练习+能力圈扩展 |
+| — | 确定性/证据/可信度/分层标注 | think/certainty-layers.md | SHOULD | 确定性分层标注（决策/风险时升级 MUST_RUN） |
+| `/跨审` | 新窗口/跨会话审计/self-review/确认偏差/独立复核/二次推导 | review/cross-session-audit.md | SHOULD | 跨会话独立复审（深度思考/不可逆决策时升级 MUST_RUN） |
+| `/并行` | 并行/多子问题/独立思考/分治 | collaboration/parallel-thinking.md | SHOULD | 多agent并行思考+综合裁决 |
 
 ### 系统命令（非 theory 模块）
 
