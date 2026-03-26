@@ -48,6 +48,12 @@ BOOT 流程：cwd ∈ 已注册项目 或 对话提及项目关键词 → 建议
 
 用户回复"好" → 按 meta.md 路由加载建议的 theory 文件并执行协议。等价于用户手动触发了对应命令。
 
+## 与 Runtime Loops 的关系
+
+- **互补分工**：sentinel.md 在未 BOOT 时检测意图并建议加载模块；`loops/` 在已 BOOT 进入任务后持续监控执行质量
+- **不重叠**：sentinel.md 建议的模块被加载后，后续执行质量由 `thinking-sentinel`（每次输出前）和 `protocol-guardian`（每 3-5 轮）接管
+- **会话结束**：sentinel.md 的时间信号触发 /评分 建议；`knowledge-auditor` 负责知识资产和状态残留审计
+
 ## 抑制
 
 - 同场景单次（/评分 除外，但已执行 /评分 则不再提醒）
