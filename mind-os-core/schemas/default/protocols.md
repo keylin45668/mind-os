@@ -14,6 +14,7 @@
 | 串联 | AI 先处理 → 人判断 | 时间有限 |
 | 并联 | AI×W₁ + 人×W₂ = 综合 | 高风险 |
 | 迭代 | 人→AI→人→AI→… | 质量优先 |
+| 并行分治 | Wave0分解→Wave1多agent并行→Wave2综合→Wave3交叉验证(可选) | 多子问题独立求解（见 `parallel-thinking.md`） |
 
 ---
 
@@ -45,8 +46,10 @@
 ## 4. 任务路由与强制执行门
 
 ```
-任务 → 路由匹配 → 加载 theory/domain → 输出前门控 → 执行
+任务 → 路由匹配 → 任务分级(🟢🟡🔴) → Pre-Input Gate → 加载 theory/domain → 输出前门控 → 执行
 ```
+
+> **任务分级联动**：路由匹配后立即执行任务分级（见 `task-grading.md`）。分级结果决定 Pre-Input Gate 检查项数量、theory 加载上限和协作拓扑。
 
 ### Pre-Output Gate
 
