@@ -505,12 +505,13 @@ collaborative: true/false    # true=团队协作，false=独立使用
 > **路径说明**：协作组织下，{data} 指向 members/{id}/，{data_root} 指向上层（含 org.md 的目录）。
 > 个人档案和独立组织下，{data} = {data_root}。
 
-## Phase 4：加载路由表 + 项目连接器 + 焦点处理（并行读取）
+## Phase 4：加载路由表 + 项目连接器 + 焦点处理 + Loops 初始化（并行读取）
 
 ```
 并行读取：
   READ {theory}/meta.md
-  READ mind-os-core/sentinel.md          ← 新增：意图检测协议
+  READ mind-os-core/sentinel.md          ← 意图检测协议
+  READ mind-os-core/loops/README.md      ← 运行时三层监控（thinking-sentinel / protocol-guardian / knowledge-auditor）
   READ domains/_router.md
   READ projects/_router.md        ← 项目连接器路由机制说明
   SCAN local/projects/*.md        ← 扫描所有个人项目连接器，动态构建路由表
@@ -567,7 +568,12 @@ collaborative: true/false    # true=团队协作，false=独立使用
   ├── 命中 → 只加载命中的 theory 文件（1-3个）
   └── 未命中 → 不加载 theory，使用 schema 通用规则
   ↓
-③ 确定协作模式（四模式）+ 拓扑（三拓扑）
+②½ 任务分级 + Pre-Input Gate（见 task-grading.md）
+  a) 根据路由命中结果判定任务级别：🟢轻量 / 🟡标准 / 🔴深度
+  b) 执行 Pre-Input Gate 检查（🟢检3项、🟡🔴检全部7项）
+  c) 全部通过 → 继续；任一失败 → 阻断，报告未通过项
+  ↓
+③ 确定协作模式（四模式）+ 拓扑（三拓扑 + 并行分治）
   ↓
 ③½ 路径选择（复杂任务时）：
   用户能在一句话内说清这件事的本质？
@@ -576,6 +582,7 @@ collaborative: true/false    # true=团队协作，false=独立使用
   轻量任务（无 MUST_RUN）→ 跳过此步
   ↓
 ④ ⚠️ 输出前门控（Pre-Output Gate）— 匹配即执行，无例外
+  ※ 此阶段同时激活 thinking-sentinel（loops/thinking-sentinel.md）进行输出质量巡检
   AI 必须在输出前声明并执行：
   a) "本次匹配到: {文件列表}，协作模式: {模式×拓扑}"
      命令触发时声明: "命令触发: /{cmd} → {文件}，MUST_RUN"
