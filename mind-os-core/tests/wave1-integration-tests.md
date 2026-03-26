@@ -92,19 +92,25 @@
 ### T-TG-05：Pre-Input Gate 失败 → 阻断
 
 ```yaml
-前置条件: 已完成 BOOT，但某项目连接器 .mind-os.md 不存在
+前置条件:
+  - 已完成 BOOT，进入 Phase 5
+  - local/projects/marketing.md 连接器卡片存在
+  - 但卡片中 context_files 指向的文件已被删除或路径不可读
+  # 注意：仅"连接器不存在"不会触发阻断（路由直接跳过）；
+  # 必须是"连接器存在且被路由命中，但所需资源不可读"才触发 #3 失败
 用户输入: "帮我分析 marketing 项目的用户增长策略"（涉及 marketing 连接器）
 预期行为:
-  路由匹配: 命中 marketing 项目连接器
-  任务分级: 🟡（跨模块）
+  路由匹配: 命中 marketing 项目连接器（keywords 含 marketing）
+  任务分级: 🟡（跨模块 + 涉及项目上下文）
   Pre-Input Gate:
-    #3_project_connector: ❌（连接器不可读）
-    policy: 阻断
+    #1_context_readable: ❌（连接器命中但 context_files 不可读）
+    #3_project_connector: ❌（连接器资源不完整）
+    policy: 阻断，报告未通过项
 验证点:
   - ☐ 输出包含"Pre-Input Gate 未通过"
-  - ☐ 明确报告 #3 未通过原因
+  - ☐ 明确报告 #1 或 #3 未通过原因（context_files 不可读）
   - ☐ 未执行任何 theory 协议（被阻断）
-  - ☐ 提供修复建议或等待人工确认
+  - ☐ 提供修复建议（如"请检查连接器中 context_files 路径"）或等待人工确认
 ```
 
 ### T-TG-06：动态升级 — 🟡 执行中发现超预期复杂度 → 升级 🔴
