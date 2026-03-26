@@ -1,15 +1,14 @@
 # 审议协议
 
 > 来源：德尔菲法 + 结构化辩论 + Mind OS 协作拓扑
-> 定义多角色审议的完整流程（Phase 1：盲审 + 合成）
+> 定义多角色审议的完整流程
 
 ---
 
 ## 流程总览
 
 ```yaml
-phases: [blind_review, synthesis]
-# Phase 2 将增加: cross_debate, human_participation, convergence
+phases: [blind_review, cross_debate, human_participation, convergence, synthesis]
 ```
 
 ---
@@ -72,6 +71,72 @@ decision:
     - "[ADOPTED] {结论编号} — 被采纳"
     - "[REJECTED] {结论编号} — 被否决，原因: {reason}"
     - "[DEFERRED] {结论编号} — 延后决策，条件: {condition}"
+```
+
+## 交叉辩论阶段
+
+```yaml
+cross_debate:
+  goal: "角色间基于盲审结果的结构化辩论，暴露分歧与补充"
+  trigger: "盲审阶段完成后自动进入"
+  rules:
+    - 每个角色看到其他角色的盲审结果
+    - 回应类型: support（支持）/ oppose（反对）/ supplement（补充）
+    - 编号制: "[{RoleCode}-r{round}-{seq}]"
+    - 回应必须引用目标: "target_ref: {原编号}"
+    - 每轮每角色最多 3 条回应，防止发散
+
+  convergence:
+    ref: "decision-levels.md → integration.protocol_impact"
+    small: "跳过辩论，直接盲审→合成"
+    medium: "至少 1 轮辩论"
+    major: "至少 2 轮辩论"
+    stop_condition: "连续一轮无新 oppose 类回应，视为收敛"
+
+  output_format:
+    response: "[{RoleCode}-r{round}-{seq}] target_ref:{原编号} type:{support|oppose|supplement} {内容}"
+```
+
+## 人类参与阶段
+
+```yaml
+human_participation:
+  goal: "人类以平等参与者身份加入审议"
+  timing: "辩论阶段中或辩论后均可介入"
+
+  modes:
+    A_bound_role:
+      name: "指定角色"
+      rule: "人类发言绑定某角色，归类到该角色名下"
+      numbering: "[{RoleCode}-r{round}-H{seq}]"
+
+    B_free_agent:
+      name: "自由身"
+      rule: "人类不绑定角色，可对任意观点评论"
+      numbering: "[HUMAN-r{round}-{seq}]"
+
+    C_multi_human:
+      name: "多人各带角色"
+      rule: "多个人类各绑定不同角色，AI 填补缺失角色"
+      numbering: "[{RoleCode}-r{round}-H{humanId}-{seq}]"
+
+  digital_avatar:
+    ref: "digital-avatar.md"
+    rule: "已授权的数字分身按代言规则参与，发言前缀 [代言]"
+    escalation: "触发回传条件时暂停，等待人类确认"
+```
+
+## 收敛阶段
+
+```yaml
+convergence:
+  goal: "基于辩论结果判定是否可进入合成"
+  ref: "decision-levels.md"
+  process:
+    1. 统计各维度的 support/oppose/supplement 比例
+    2. 按 decision-levels.md 的等级规则判定收敛
+    3. 未收敛 → 进入下一轮辩论
+    4. 已收敛 → 进入合成阶段
 ```
 
 ## 编号制（引用 role-meta.md）

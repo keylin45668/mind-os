@@ -53,17 +53,37 @@ phases:
 
 ```yaml
 gap_analysis:
-  trigger: "actual 阶段得分提交后自动触发"
-  process:
-    1. 逐维度计算 |theoretical - actual| 差距
-    2. 差距 ≥ 3 分的维度标记为"显著偏差"
-    3. 识别偏差根因：哪一步判断失准
-    4. 生成改进建议
+  trigger_chain:
+    1. "actual 阶段得分提交"
+    2. "系统自动逐维度计算 |theoretical - actual|"
+    3. "差距 ≥ 3 分的维度标记为显著偏差"
+    4. "生成差距分析报告"
+    5. "自动触发 evolution.md 进化反馈流程"
+
   output:
-    - dimension_gaps       # 各维度差距值
+    - dimension_gaps       # 各维度差距值 + 偏差方向
     - root_cause           # 偏差根因识别
     - improvements         # 改进建议
     - role_feedback        # 反馈到角色模板优化
+
+  evolution_interface:
+    ref: "evolution.md"
+    handoff: "差距分析报告作为 evolution 的输入"
+    feedback_targets:
+      - "role_templates → 调整盲区/反对模式"
+      - "protocol_parameters → 调整收敛阈值/辩论轮数"
+      - "decision_level_calibration → 校准默认等级"
+```
+
+## 版本化
+
+```yaml
+versioning:
+  rule: "评分记录不可变，修改产生新版本"
+  format: "v{major}.{minor} — major: 重评, minor: 补充评分"
+  recompute: "评分修改后自动重算差距分析"
+  history: "保留所有版本，支持趋势追踪"
+  audit: "[SCORE-v{version}] {修改原因} by {修改人}"
 ```
 
 ## 评分规则
