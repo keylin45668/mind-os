@@ -1,6 +1,6 @@
 # Mind OS
 
-> 版本：v5.1 | 变更日志：[CHANGELOG.md](CHANGELOG.md) | 项目地址：[GitHub](https://github.com/keylin45668/mind-os)
+> 版本：v5.2 | 变更日志：[CHANGELOG.md](CHANGELOG.md) | 项目地址：[GitHub](https://github.com/keylin45668/mind-os)
 >
 > 一切认知活动 = `Transform(input, context) → output`
 
@@ -55,6 +55,7 @@ context = schema ⊕ theory ⊕ data
 | 复盘回顾 | 日/周/月/季/年回顾节奏 | review/rules.md |
 | 协作增强 | 4 种模式 × 3 种拓扑 | schemas/default/protocols.md |
 | 项目连接 | 给任何外部项目插一张卡就能用 Mind OS 的脑子 | projects/_router.md |
+| 多角色审议 | 角色元模型 + 审议协议 + 评分体系 + 决策分级 | deliberation/meta.md |
 | 自迭代引擎 | AutoEvolve 闭环优化 | autoevolve/ENTRY.md |
 
 ---
@@ -69,7 +70,7 @@ mind-os-core/                    ← 系统内核（发行版，git tracked）
 │   ├── constitution.md          ← 四条宪法 + 冻结指标
 │   ├── protocols.md             ← 协作模式 + 门控 + 管道 + 约定
 │   └── output-template.md       ← 输出文档模板
-├── theories/rational/           ← 方法论模块（18 条路由，按需加载）
+├── theories/rational/           ← 方法论模块（19 条路由，按需加载）
 │   ├── meta.md                  ← 路由表（关键词 → 文件 + 执行级别）
 │   ├── think/                   ← 思考类（偏差扫描、迭代引擎、审计方法）
 │   ├── decide/                  ← 决策类（排期、反脆弱、竞争、多模型）
@@ -77,7 +78,8 @@ mind-os-core/                    ← 系统内核（发行版，git tracked）
 │   ├── organize/                ← 分类（PARA 规则）
 │   ├── knowledge/               ← 知识（Zettelkasten）
 │   ├── review/                  ← 回顾（周期 + 会话评分）
-│   └── collaboration/           ← 协作（路由 + 动力学 + 学习型组织）
+│   ├── collaboration/           ← 协作（路由 + 动力学 + 学习型组织）
+│   └── deliberation/            ← 多角色审议（角色元模型 + 协议 + 评分 + 决策分级）
 ├── domains/                     ← 领域专属规则
 │   ├── _router.md               ← 领域路由表
 │   ├── software-dev/            ← 代码/编程/开发

@@ -5,6 +5,50 @@
 
 ---
 
+## v5.2 — 2026-03-27 — 多角色审议：从二元对抗到多方结构化讨论
+
+### 变更摘要
+
+- **多角色审议理论模块**（`theories/rational/deliberation/`）：Phase 1 完成
+  - `meta.md`：审议模块内部路由表，与根 meta.md 联动
+  - `role-meta.md`：角色元模型（identity + evaluation_framework + behavior）+ 多角色编号制 `[{RoleCode}-r{round}-{seq}]`
+  - `protocol.md`：审议协议（盲审阶段 + 合成阶段：共识检测、分歧标记、盲区发现）
+  - `scoring.md`：评分体系（5 维度声明式 YAML 数组 + 理论/实际双阶段 + 差距分析）
+  - `decision-levels.md`：决策分级标准（small/medium/major 三级 + override 双向调整 + 超时机制）
+- **路由表扩展**：meta.md 新增 `/审议` 命令，活跃模块 29→30
+- **与 iterative-engine 互补**：审议处理多角色多方讨论，红蓝辩论处理二元对抗
+
+### 新增/修改文件
+
+| 文件 | 变更 |
+|------|------|
+| theories/rational/deliberation/meta.md | 🆕 审议模块内部路由表 |
+| theories/rational/deliberation/role-meta.md | 🆕 角色元模型 + 编号制 + 内置角色模板 |
+| theories/rational/deliberation/protocol.md | 🆕 审议协议（盲审 + 合成） |
+| theories/rational/deliberation/scoring.md | 🆕 评分体系（5 维度 + 双阶段 + 差距分析） |
+| theories/rational/deliberation/decision-levels.md | 🆕 决策分级（三级 + override + 超时） |
+| theories/rational/meta.md | 追加 `/审议` 路由 + 模块计数 29→30 |
+| config-template.md | version 5.1→5.2 |
+| README.md | 版本号 + 核心能力表 + 架构图 |
+| DESIGN-NOTES.md | Layer 22 推导记录 |
+| SKILL.md | 版本号 + 模块数 |
+| CHANGELOG.md | 本条目 |
+| tests/deliberation-phase1-tests.md | 🆕 Phase 1 测试用例（8 项全 PASS） |
+
+### 设计原则
+
+- **6 个正交原语**：角色定义 × 审议协议 × 决策分级 × 评分维度 × 数字分身 × 进化反馈
+- **纯增量**：不修改任何现有理论文件内容，仅 meta.md 追加行
+- **≤1000 tokens/文件**：严格遵守复杂度预算
+
+### 升级指引
+
+- 新增 `deliberation/` 目录，无迁移需求
+- 现有红蓝辩论和并行思考协议不受影响
+- Phase 2（数字分身）和 Phase 3（进化反馈）将在后续版本完成
+
+---
+
 ## v5.1 — 2026-03-24 — 项目连接器：给任何仓库装脑子
 
 ### 变更摘要

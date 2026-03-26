@@ -1,6 +1,6 @@
 # Theory Pack: rational — 按需加载路由表
 
-> 当前活跃模块：**29**（无预存上限，按需加载）
+> 当前活跃模块：**30**（无预存上限，按需加载）
 > **AI 启动时只读本文件，不加载任何子目录内容。任务进来后按关键词匹配加载。**
 
 ---
@@ -40,6 +40,7 @@
 | — | 确定性/证据/可信度/分层标注 | think/certainty-layers.md | SHOULD | 确定性分层标注（决策/风险时升级 MUST_RUN） |
 | `/跨审` | 新窗口/跨会话审计/self-review/确认偏差/独立复核/二次推导 | review/cross-session-audit.md | SHOULD | 跨会话独立复审（深度思考/不可逆决策时升级 MUST_RUN） |
 | `/并行` | 并行/多子问题/独立思考/分治 | collaboration/parallel-thinking.md | SHOULD | 多agent并行思考+综合裁决 |
+| `/审议` | 多角色/审议/多视角/角色讨论/多方讨论 | deliberation/meta.md | SHOULD | 多角色审议（角色元模型+协议+评分） |
 
 ### 系统命令（非 theory 模块）
 
