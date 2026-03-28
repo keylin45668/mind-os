@@ -209,6 +209,32 @@ converge_check:
     计算: user-input-r{N}.md 存在且包含终止关键词
     判定: converged
 
+  # ── 红蓝独立性检测（F06 量化标准）──
+
+  independence_check:
+    目的: 防止红方走形式（直接同意蓝方 = 深度不足）
+    触发: 每轮裁决完成后
+    量化规则:
+      rule_1_new_attacks:
+        条件: red_new >= 1（红方每轮至少提出 1 个 [NEW] 质疑）
+        违反: red_new == 0 且 red_repeat == 0 → 红方无实质输出，独立性=0
+      rule_2_attack_diversity:
+        条件: 红方 [NEW] 质疑攻击的蓝方论点 ID 不少于 2 个不同的 [B-] 编号
+        计算: 从 red.md 提取 "攻击 [B-xxx]" 中的 xxx → 去重 → count >= 2
+        违反: 只攻击 1 个论点 → 独立性不足（红方未充分审查）
+      rule_3_origin_check:
+        条件: red.md 中存在 "## 本源检查" 章节且结论非空
+        计算: grep -c '## 本源检查' red.md >= 1
+        违反: 缺少本源检查 → 未履行宪法第四条
+      rule_4_no_echo:
+        条件: 红方不可直接复述蓝方结论作为自己的观点
+        计算: verdict.md 中 fallen + modified >= 1（红方至少成功挑战 1 个论点）
+        违反: fallen == 0 且 modified == 0 且 survived == blue_count → 红方完全同意蓝方
+    综合判定:
+      pass: rule_1 + rule_3 必须通过，rule_2 + rule_4 至少通过 1 个
+      fail: rule_1 或 rule_3 违反 → 标记"⚠️ 红蓝独立性不足，需重新执行红方"
+      fail_action: 重新生成红方输出，提示"本轮红方未展现独立视角，请重新执行本源检查和质疑"
+
   # ── 全局收敛 ──
 
   all_converged:

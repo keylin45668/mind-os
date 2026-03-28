@@ -12,15 +12,15 @@ history:
   - task: "优化 Mind OS"
     status: "in_progress"
     domain: "software-dev"
-    date: "2025-03-23"
+    date: "2026-03-23"
   - task: "身体健康"
     status: "pending"
     domain: "personal"
-    date: "2025-03-23"
+    date: "2026-03-23"
   - task: "公司管理"
     status: "pending"
     domain: "strategy"
-    date: "2025-03-23"
+    date: "2026-03-23"
 ```
 
 ## AI 处理规则

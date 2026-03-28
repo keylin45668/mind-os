@@ -43,7 +43,7 @@ dimensions:
 
 ```yaml
 rating_flow:
-  trigger: 会话即将结束（Stop hook 检测到无待办任务）
+  trigger: session-audit 完成后串行触发（审查 → 评分，不可独立触发）
 
   step_1_ai_score:           # AI 自评（基于可量化数据）
     方法: 从会话中提取客观事实
@@ -159,7 +159,12 @@ rolling_compression:
 
 ```yaml
 frozen_metric_link:
-  协作增益率: session_rating_avg > 3.0 → 协作有正向增益
+  协作增益率:
+    公式: session_rating_avg / 3.0（定义见 constitution.md）
+    "> 1.0": 协作有正向增益（目标达成）
+    "= 1.0": 持平（需优化）
+    "< 1.0": 协作拖累（触发系统审计）
+    数据: 最近 10 次会话评分的 5 维加权均值
   趋势分析: 连续 5 次评分下降 → 触发系统审计
   维度诊断:
     D2 持续低分 → theory 规则需优化

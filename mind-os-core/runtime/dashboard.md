@@ -42,7 +42,7 @@ pending_reviews: []          # 到期待回顾的决策
 ## 系统健康
 
 ```yaml
-theory_modules: 16           # 活跃模块数（无预存上限，运行时≤3同时加载）
+theory_modules: 30           # 活跃模块数（无预存上限，运行时≤3同时加载）
 schema_rules: null/30        # 活跃规则数/上限（待统计）
 last_quarterly_audit: null
 chaos_edge: "healthy"        # healthy / too_ordered / too_chaotic

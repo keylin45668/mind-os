@@ -88,8 +88,30 @@ command_routing:
 ### 关键词路由
 
 1. **单匹配**：只加载命中的文件
-2. **多匹配**：加载所有命中文件，**上限 3 个**（超过时只加载相关度最高的 3 个）
+2. **多匹配**：加载所有命中文件，**上限 3 个**（超过时按相关度排序取 Top 3）
 3. **无匹配**：不加载任何 theory，使用 schema/ 通用规则
+
+### 相关度排序算法（多匹配 > 3 个时）
+
+```yaml
+relevance_ranking:
+  # 按以下优先级逐层排序，同层内并列则全部保留（直到总数 ≤ 3）
+  priority_1_execution_level:    # 执行级别优先
+    MUST_RUN > SHOULD > MAY
+    # MUST_RUN 始终优先加载，不参与排序淘汰
+  priority_2_match_type:         # 匹配类型
+    命令触发(/) > 关键词核心匹配 > 关键词修饰语匹配
+    # 核心匹配：关键词出现在动词/任务位置
+    # 修饰语匹配：关键词出现在宾语/背景位置（已降级为 MAY 的）
+  priority_3_keyword_density:    # 关键词密度
+    用户输入中匹配到该模块的关键词数量（多 > 少）
+  priority_4_domain_affinity:    # 领域亲和度
+    如果已匹配到 domain，与该 domain 关联更紧密的 theory 优先
+    # 例：domain=finance 时，antifragile > iterative-engine
+
+  降级声明: 被排除的模块必须在 Pre-Output Gate 声明中列出
+    格式: "降级: {模块名}（相关度排序第 {N}，超出加载上限）"
+```
 4. **think/ 二级路由**：命中 think 后，再查 think/_index.md 匹配具体偏差条目
 5. **每个文件 ≤ 1000 tokens**：确保按需加载后上下文可控（3 文件 × 1000 = 3000 tokens 预算）
 6. **MUST_RUN 意图验证（两遍路由）**：关键词命中 MUST_RUN 后，必须追加一步意图检查：

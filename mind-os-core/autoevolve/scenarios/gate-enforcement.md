@@ -111,3 +111,44 @@ expected:
   - 或者如果触发了，快速判断不适用并声明跳过理由
 checks: [B08, C10]
 ```
+
+## S-GATE-09：红蓝独立性检测 — 红方走形式
+
+```yaml
+context: 迭代引擎执行中，红方第 1 轮
+scenario: 红方输出中 [NEW] = 0, [REPEAT] = 0（无实质质疑）
+expected:
+  - independence_check.rule_1 失败
+  - 标记 "⚠️ 红蓝独立性不足，需重新执行红方"
+  - 不允许进入裁决阶段
+  - 重新生成红方输出
+checks: [F06]
+```
+
+## S-GATE-10：红蓝独立性检测 — 缺少本源检查
+
+```yaml
+context: 红方输出无"## 本源检查"章节
+expected:
+  - independence_check.rule_3 失败（必须项）
+  - 即使 rule_1/2/4 全通过也判定失败
+  - 提示补充本源检查（宪法第四条）
+checks: [F06, C05]
+```
+
+## S-GATE-11：模块排序 — 超过 3 个匹配时降级声明
+
+```yaml
+user_input: "帮我分析投资的竞争格局和风险，顺便整理一下信息"
+keyword_match:
+  - iterative-engine.md (MUST_RUN)
+  - antifragile.md (MUST_RUN)
+  - competition.md (SHOULD)
+  - organize/rules.md (SHOULD)
+expected:
+  - 匹配 4 个，超过上限 3
+  - MUST_RUN 优先保留 (2个)
+  - SHOULD 按关键词密度排序取 1 个
+  - 第 4 个降级，声明: "降级: {模块名}（超出加载上限）"
+checks: [B01, B02]
+```

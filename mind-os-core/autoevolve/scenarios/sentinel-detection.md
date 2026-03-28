@@ -174,3 +174,34 @@ expected:
   - 但 /评分 已执行，不再建议
 checks: [I09]
 ```
+
+## S-SENT-14：上下文压缩后 BOOT 状态 fallback 检测
+
+```yaml
+context:
+  - 用户早期执行了 BOOT
+  - 长会话导致上下文压缩，BOOT 面板记录丢失
+  - runtime/dashboard.md snapshot_date == 今天
+user_input: "帮我想想接下来怎么办"
+expected:
+  - sentinel 3 条主判定规则全部未命中（被压缩丢失）
+  - fallback 检查: dashboard.md snapshot_date == 今天 → 视为已 BOOT
+  - 场景信号停用，不输出建议块
+  - 直接走 meta.md 路由
+checks: [I03]
+```
+
+## S-SENT-15：dashboard 日期非今天时 sentinel 激活
+
+```yaml
+context:
+  - 上下文压缩导致 BOOT 记录丢失
+  - runtime/dashboard.md snapshot_date = 昨天
+user_input: "帮我分析这个方案"
+expected:
+  - sentinel 主判定和 fallback 均未命中
+  - 判定: 未 BOOT
+  - 场景信号激活
+  - 输出建议块: 检测到分析需求，建议 /分析
+checks: [I01, I03]
+```

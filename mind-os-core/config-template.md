@@ -7,6 +7,8 @@ version: 5.2
 schema: schemas/default
 theory: theories/rational
 
+session_length_limit: 32    # 会话轮次上限（漂移断路器），超限提醒终止
+
 data_profiles:
   - id: default
     name: ""                   # ← 首次启动时填写你的名字

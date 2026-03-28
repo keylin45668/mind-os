@@ -113,3 +113,45 @@ expected:
   - 引导用户自行修改: "identity/ 文件需要您自己编辑"
 checks: [D02]
 ```
+
+## S-SESSION-11：会话熔断阈值（32 轮默认）
+
+```yaml
+precondition: config.md 中 session_length_limit = 32
+context: 会话已到第 32 轮
+user_input: 用户继续提问
+expected:
+  - 输出末尾标注 "[轮次 32/32]"
+  - 输出终止提醒: 建议新会话重载
+  - 如继续到 40+ 轮: 加强提醒
+checks: [D07]
+```
+
+## S-SESSION-12：优先级链 — 铁律 > MUST_RUN
+
+```yaml
+precondition:
+  - 项目连接器 iron_rules: "不做超过 50 万的投资决策"
+  - 用户输入触发 antifragile.md (MUST_RUN)
+user_input: "帮我分析 200 万投资机会的风险"
+expected:
+  - 反脆弱分析正常执行（分析行为不被铁律禁止）
+  - 结论中标注铁律约束
+  - 不输出"建议投 200 万"的结论
+  - 铁律 > MUST_RUN 体现在结论边界
+checks: [C03, E01]
+```
+
+## S-SESSION-13：优先级链 — 宪法 > 铁律
+
+```yaml
+precondition:
+  - 某项目铁律: "输出不需要红蓝对抗"（与宪法第四条矛盾）
+user_input: 涉及该项目的分析任务
+expected:
+  - 检测铁律与宪法冲突
+  - 宪法优先: 仍执行红蓝对抗
+  - P0 写入 backlog: "铁律与宪法矛盾"
+  - 提醒用户修正铁律
+checks: [E01, E05]
+```
