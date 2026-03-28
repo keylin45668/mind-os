@@ -8,6 +8,10 @@ local/
 # 设计历史文档（开发者本地保留）
 archive/
 
+# 需求类文档（本地保留，不随项目分发）
+prd/
+docs/superpowers/
+
 # OS / 编辑器
 .DS_Store
 Thumbs.db
