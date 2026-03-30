@@ -1,6 +1,6 @@
 # Mind OS
 
-> 版本：v5.2 | 变更日志：[CHANGELOG.md](CHANGELOG.md) | 项目地址：[GitHub](https://github.com/keylin45668/mind-os)
+> 版本：v5.3 | 变更日志：[CHANGELOG.md](CHANGELOG.md) | 项目地址：[GitHub](https://github.com/keylin45668/mind-os)
 >
 > 一切认知活动 = `Transform(input, context) → output`
 
