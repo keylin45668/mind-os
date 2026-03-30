@@ -1,6 +1,26 @@
-# 原则化管理 + 协作评估
+---
+name: principles
+command: /原则
+keywords: [原则, 评估, 增益]
+execution_level: MAY
+type: framework
+domain: collaboration
+summary: "痛苦+反思=进步 + BWDM可信度加权 + 协作质量五维评估 + 鲁棒性测试"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《原则》+ 协作量化框架
+## 摘要
+
+- **痛苦→进步**：事件记录→根因分析→提炼if-then规则→写入theory→设复盘提醒
+- **可信度加权**：w = accuracy×0.4 + evidence×0.3 + experience×0.3
+- **协作五维**：accuracy(0.3)/efficiency(0.2)/robustness(0.2)/satisfaction(0.2)/ethics(0.1)
+- **鲁棒性测试**：异常输入+压力+对抗+反转，通过率≥70%
+
+# 原则化管理 + 协作评估
 
 ---
 

@@ -1,6 +1,26 @@
-# 确定性分层标注体系
+---
+name: certainty-layers
+command: null
+keywords: [确定性, 证据, 可信度, 分层标注]
+execution_level: SHOULD
+type: framework
+domain: think
+summary: "确定性三层标注：[事实](有证据) / [推断](逻辑推导) / [待确认](缺信息)，决策/风险时升级MUST_RUN"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 为思考场景输出增加证据确定性分层，借鉴 _architecture 三层标注机制。
+## 摘要
+
+- **三层标注**：`[事实]`有明确证据 / `[推断]`基于事实的合理推导 / `[待确认]`缺关键信息
+- **标注密度**：只在结论、建议、风险等决策节点标注，通常 2-5 个
+- **冲突处理**：事实>推断>待确认，两条事实矛盾→自动升级为待确认交人工裁决
+- **与红蓝协议**：蓝方论点必须标注确定性，红方攻击事实层须提供同等反证
+
+# 确定性分层标注体系
 
 ---
 

@@ -1,8 +1,26 @@
-# 模块进化机制（达尔文层）
+---
+name: evolution
+command: /进化
+keywords: [进化, 适应度, 淘汰, 分化]
+execution_level: SHOULD
+type: specification
+domain: collaboration
+summary: "模块适应度评分(S/A/B/C) + 淘汰归档(连续2月C级) + 生态位分化 + 红皇后反停滞"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《物种起源》选择压力 + 适应性景观 + 生态位分化
-> 定位：与拉马克层（宪法第五条，任务级学习）互补——拉马克负责学习，达尔文负责淘汰
-> 触发：每月回顾时自动执行，或 /进化 手动触发
+## 摘要
+
+- **适应度**：fitness = 命中率×0.3 + 评分贡献×0.3 + 加速贡献×0.2 + 新鲜度×0.2，分S/A/B/C四级
+- **淘汰**：连续2月C级→归档/合并/保留观察/重构（MUST_RUN模块豁免）
+- **分化**：同模块跨domain评分方差>1.5→建议拆分为场景特化版本
+- **红皇后**：连续3月fitness不变→标记"停滞"，下次使用时提醒检查适用性
+
+# 模块进化机制（达尔文层）
 
 ---
 

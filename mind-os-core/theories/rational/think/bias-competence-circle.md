@@ -1,6 +1,19 @@
-# 能力圈
+---
+name: bias-competence-circle
+command: null
+keywords: [新领域, 首次, 不熟悉]
+execution_level: SHOULD
+type: checklist
+domain: think
+summary: "能力圈检测：历史检索→圈内/圈外判定→圈外触发证否协议"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《穷查理宝典》
+# 能力圈
 
 ```yaml
 trigger: 不常接触领域 OR 首次在某领域决策

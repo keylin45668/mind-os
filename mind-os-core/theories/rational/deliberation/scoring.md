@@ -1,7 +1,25 @@
-# 评分体系
+---
+name: deliberation-scoring
+command: null
+keywords: [审议评分, 决策质量评估]
+execution_level: SHOULD
+type: metric
+domain: deliberation
+summary: "5维审议评分(深度/合规/效率/可行动性/自定义) + 理论得分vs实际得分对比"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：多准则决策分析（MCDA）+ 闭环反馈理论
-> 定义决策质量的量化评估机制
+## 摘要
+
+- **5维评分**：深度/合规/效率/可行动性/自定义第5维，每维 1-5 分
+- **双阶段**：理论评分(审议完成时预测) + 实际评分(ground truth 提交后)→差距驱动进化
+- **客观依据**：每维打分必须从文档中提取依据，不允许拍脑袋
+
+# 评分体系
 
 ---
 

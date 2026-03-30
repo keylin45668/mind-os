@@ -1,6 +1,25 @@
-# 学习型组织
+---
+name: learning-org
+command: /团队
+keywords: [团队, 学习, 对话]
+execution_level: MAY
+type: framework
+domain: collaboration
+summary: "深度汇谈vs讨论 + 双环学习(单环3次未改善→强制双环) + 团队学习障碍识别"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《第五项修炼》
+## 摘要
+
+- **深度汇谈vs讨论**：探索未知→汇谈(暴露假设)，比较方案→讨论(偏差检查)，AI检测混淆时提醒切换
+- **双环学习**：单环(改行动)连续3次未改善→强制双环(质疑假设，改心智模型)
+- **团队障碍**：熟练的无能→减法实验 / 习惯性防卫→推论阶梯 / 团体迷思→并联+独立判断
+
+# 学习型组织
 
 ---
 

@@ -1,6 +1,25 @@
-# 多模型格栅
+---
+name: models-meta
+command: /模型
+keywords: [模型, 跨学科, 格栅]
+execution_level: MAY
+type: router
+domain: decide
+summary: "多模型格栅：≥3模型跨≥2学科交叉比对，Lollapalooza检测同源偏差"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《穷查理宝典》
+## 摘要
+
+- **格栅规则**：每次决策检索≥3模型，跨≥2学科，交叉比对一致性
+- **Lollapalooza**：≥3模型同方向→极强信号，但需检查同源偏差
+- **初始模型集**：冗余备份(工程)/复利(数学)/临界点(物理)/自我催化(化学)/进化(生物)/误判心理(心理)
+
+# 多模型格栅
 
 ---
 

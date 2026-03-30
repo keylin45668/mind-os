@@ -1,7 +1,26 @@
-# 任务级质量循环（Quality Loop）
+---
+name: quality-loop
+command: /质量
+keywords: [质量循环, 打磨, quality loop]
+execution_level: MAY
+type: framework
+domain: think
+summary: "任务级质量循环：Draft→自评→修复→再评→交付，动态检查清单驱动收敛"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：AutoEvolve 跨会话迭代 → 任务内收敛
-> 核心：Draft → 自评 → 修复 → 再评 → 交付。质量驱动收敛，非固定轮次。
+## 摘要
+
+- **触发**：匹配 ≥1 MUST_RUN 协议后可选激活，用户确认后启动
+- **动态清单**：从已匹配 MUST_RUN 协议的步间门控提取 + 2 项通用项(本源+核心问题)
+- **收敛条件**：ISSUES==0 / 连续2轮不变(plateau) / 轮次≥5(emergency brake)
+- **边界**：断路器优先、用户可中断、不与 depth_check 重复
+
+# 任务级质量循环（Quality Loop）
 
 ---
 

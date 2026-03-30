@@ -1,7 +1,26 @@
-# 审议协议
+---
+name: deliberation-protocol
+command: null
+keywords: [审议流程, 盲审, 辩论, 收敛]
+execution_level: SHOULD
+type: specification
+domain: deliberation
+summary: "四阶段审议：W0盲审(独立分析)→W1辩论(交叉质疑)→W2收敛(共识识别)→W3综合(含异议)"
+context: isolated
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：德尔菲法 + 结构化辩论 + Mind OS 协作拓扑
-> 定义多角色审议的完整流程
+## 摘要
+
+- **W0盲审**：所有角色独立分析，不交叉阅读，消除锚定效应
+- **W1辩论**：各角色呈现观点→交叉提问→回应质疑
+- **W2收敛**：识别共识区域→标记分歧→尝试整合
+- **W3综合**：统一建议 + 少数派异议保留(不消灭不同声音)
+
+# 审议协议
 
 ---
 

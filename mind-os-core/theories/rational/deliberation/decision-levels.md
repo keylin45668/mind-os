@@ -1,7 +1,25 @@
-# 决策分级标准
+---
+name: decision-levels
+command: null
+keywords: [决策分级, 人类干预]
+execution_level: SHOULD
+type: framework
+domain: deliberation
+summary: "🟢1角色(AI独立)/🟡2-3角色(盲审+辩论)/🔴3-4角色+外部专家，人类干预规则"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：组织决策理论 + RACI 矩阵
-> 定义不同等级决策的收敛策略和人类干预规则
+## 摘要
+
+- **🟢 轻量**：1角色(AI独立)，快速输出，无需盲审
+- **🟡 标准**：2-3角色，盲审→辩论→收敛，人审核结果
+- **🔴 重大**：3-4角色+外部专家，完整审议协议，人参与裁决
+
+# 决策分级标准
 
 ---
 

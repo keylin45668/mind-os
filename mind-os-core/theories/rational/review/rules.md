@@ -1,6 +1,25 @@
-# 回顾理论
+---
+name: review-rules
+command: /回顾
+keywords: [回顾, 复盘, 总结]
+execution_level: SHOULD
+type: framework
+domain: review
+summary: "GTD多层回顾：日(快照)/周(趋势)/月(全指标+适应度)/季(系统审计)/年(范式)"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：GTD Review
+## 摘要
+
+- **多层回顾**：日(快照)/周(趋势+人自评)/月(全指标+模块适应度)/季(系统审计+复杂度审计)/年(范式审视)
+- **节奏递进**：频率越低→审视层级越高，日=参数调整，季=规则修改，年=目标修订
+- **结晶联动**：回顾过程触发 crystallize.md 三问(模式/缺口/知识)
+
+# 回顾理论
 
 ---
 

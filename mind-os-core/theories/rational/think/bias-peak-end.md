@@ -1,6 +1,19 @@
-# 峰终定律
+---
+name: bias-peak-end
+command: null
+keywords: [回顾, 复盘, 总结]
+execution_level: SHOULD
+type: checklist
+domain: think
+summary: "峰终定律检测：识别峰值+终点事件 → 对比过程均分 → 偏差提示"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《思考，快与慢》
+# 峰终定律
 
 ```yaml
 trigger: 日/周/月回顾

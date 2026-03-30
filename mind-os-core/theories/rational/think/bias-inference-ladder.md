@@ -1,7 +1,26 @@
-# 推论阶梯
+---
+name: bias-inference-ladder
+command: null
+keywords: [我觉得, 我认为, 人际冲突]
+execution_level: SHOULD
+type: framework
+domain: think
+summary: "推论阶梯6层拆解：行动→信念→结论→解释→选择性数据→事实，诊断薄弱环节"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：Chris Argyris / 《第五项修炼》
-> 适用：主观判断、人际冲突、"我觉得…"、归因分析
+## 摘要
+
+- **6层模型**：从行动(顶)→信念→结论→解释/归因→选择性数据→原始事实(底)逐层拆解
+- **标注**：每层 ✅有依据/⚠️缺证据/❌纯假设，薄弱环节≥2个→推论链不可靠
+- **双环学习**：红环(回到事实层补数据) + 蓝环(回到解释层生成替代解释) → 交汇更新结论
+- **触发**：人际冲突时升级为 MUST_RUN
+
+# 推论阶梯
 
 ---
 

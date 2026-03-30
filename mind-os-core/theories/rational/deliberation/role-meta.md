@@ -1,7 +1,25 @@
-# 角色元模型
+---
+name: role-meta
+command: null
+keywords: [角色定义, 审议角色]
+execution_level: SHOULD
+type: specification
+domain: deliberation
+summary: "角色元模型：身份(背景/价值观/约束) + 评估框架(成功标准) + 行为规则(论证方式)"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：组织行为学 + 利益相关方分析 + Mind OS 正交架构
-> 定义审议角色的完整结构，供工程层实例化具体角色
+## 摘要
+
+- **角色结构**：identity(背景/价值观/约束) + evaluation_framework(成功标准) + behavior(论证方式/回应规则)
+- **实例化**：元模型定义结构，具体角色填充内容(如"风险官""乐观者""用户代言人")
+- **正交性**：角色定义独立于审议协议，可组合不同角色参与不同级别决策
+
+# 角色元模型
 
 ---
 

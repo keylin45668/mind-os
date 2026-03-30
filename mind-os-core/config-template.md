@@ -3,7 +3,7 @@
 > 首次启动时自动复制到 `local/config.md`。修改 `local/config.md` 切换配置，本文件不要直接改。
 
 ```yaml
-version: 5.2
+version: 5.3
 schema: schemas/default
 theory: theories/rational
 

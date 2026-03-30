@@ -1,8 +1,26 @@
-# 任务迭代引擎
+---
+name: task-iterate
+command: /深度迭代
+keywords: [深度迭代, 多轮迭代, 加速思考]
+execution_level: MUST_RUN
+type: specification
+domain: think
+summary: "任务级多轮自动迭代：思考抽象→N轮蓝红自动跑→人类检查点确认/注入"
+context: isolated
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: "至少1个方向完成完整蓝-红-裁决"
+---
 
-> 将用户任务的思考过程自动化迭代，加速收敛到高质量结论。
-> 与迭代引擎（iterative-engine）的关系：迭代引擎 = 单轮人在场；本协议 = N 轮 AI 自动跑，人在检查点。
-> 与 autoevolve 的关系：同构架构（文件驱动状态 + 标量指标 + 收敛条件），应用于用户任务而非系统合规。
+## 摘要
+
+- **三层架构**：L1 思考抽象(提取推理链) → L2 自动迭代(蓝红N轮) → L3 人类检查点(审核/注入)
+- **思考链文档**：核心问题 + 论点链(标注假设依赖) + 未解决问题 + 质量基线
+- **收敛**：质量信号驱动(见 task-iterate-signals.md)，max 5 轮硬上限
+- **集成**：单轮用 iterative-engine，未收敛建议 /深度迭代
+
+# 任务迭代引擎
 
 ---
 

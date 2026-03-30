@@ -1,6 +1,19 @@
-# WYSIATI（所见即全部）
+---
+name: bias-wysiati
+command: null
+keywords: [信息不足, 信息源少, 片面]
+execution_level: SHOULD
+type: checklist
+domain: think
+summary: "WYSIATI检测：信息缺口扫描 + 反例注入 + 视角轮转"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《思考，快与慢》
+# WYSIATI（所见即全部）
 
 ```yaml
 trigger: 决策依据 < 3个信息源 OR 信息时间跨度 < 48h

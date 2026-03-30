@@ -1,6 +1,25 @@
-# 组织理论
+---
+name: organize-rules
+command: /整理
+keywords: [分类, 整理, 归档]
+execution_level: SHOULD
+type: checklist
+domain: organize
+summary: "PARA分流：Projects(有截止日期) / Areas(持续职责) / Resources(参考) / Archives(冷存储)"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：PARA（Projects / Areas / Resources / Archives）
+## 摘要
+
+- **PARA 分流**：inbox→Projects(有截止日)/Areas(持续责任)/Resources(参考)/Archives(冷存储)
+- **2分钟规则**：2分钟内能完成→立即处理并归档，不进入分流树
+- **判断树**：项目?→领域?→参考?→都不是→归档或删除
+
+# 组织理论
 
 ---
 

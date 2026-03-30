@@ -63,11 +63,10 @@ pre_output_gate:
     SHOULD: 跳过须声明理由
     MAY: 可选参考
   3_self_check: "MUST_RUN 全部执行了？" → 未通过则补执行
-  4_depth_check:  # 防走形式
-    - iterative-engine: 红方须与蓝方观点不同
-    - antifragile: 须给具体百分比和理由
-    - system-audit: 至少 2 个方法有实质产出
-    - think/_index: 偏差须关联用户具体情境
+  4_depth_check:  # 从已加载模块 frontmatter hooks 动态聚合
+    rule: "读取每个已加载模块的 hooks.depth_check 和 hooks.post_check，逐条执行"
+    fallback: "模块无 hooks 或 hooks 为 null → 跳过该模块深度检查"
+    说明: "各模块的质量门控已迁移至模块 frontmatter 的 hooks 字段（见 module-frontmatter-spec.md）"
   5_session_cap: MUST_RUN ≥ 3 → 建议拆会话保深度
   6_quality_loop: 匹配 ≥1 MUST_RUN 后可选激活 quality-loop.md
 ```

@@ -1,6 +1,25 @@
-# 系统动力学方法论
+---
+name: dynamics
+command: /动力学
+keywords: [系统, 回路, 陷阱, 动力学]
+execution_level: MAY
+type: framework
+domain: collaboration
+summary: "7种系统陷阱识别+免疫 + 创造性张力(愿景-现实差距) + 自组织三重同构"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《系统之美》《第五项修炼》《复杂》
+## 摘要
+
+- **7种陷阱**：目标侵蚀/转嫁负担/信息过载/共演化锁定/成功压制/提前透支/分心转移
+- **创造性张力**：愿景锚定→月度现实测量→差距检测(愿景下调=🚨目标侵蚀)
+- **自组织同构**：充分信息+自由选择+可退出→允许自组织(最小介入)
+
+# 系统动力学方法论
 
 ---
 

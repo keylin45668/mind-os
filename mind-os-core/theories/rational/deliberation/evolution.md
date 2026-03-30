@@ -1,7 +1,25 @@
-# 进化反馈协议
+---
+name: deliberation-evolution
+command: null
+keywords: [审议进化, 角色优化]
+execution_level: SHOULD
+type: framework
+domain: deliberation
+summary: "决策后回溯：理论得分vs实际结果→差距分析→角色参数优化→下轮审议改进"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：PDCA 循环 + 闭环控制理论
-> 定义理论得分 vs 实际得分的差距如何驱动系统优化
+## 摘要
+
+- **差距分析**：理论得分(审议预测) vs 实际结果(ground truth)→找出哪个角色判断最准/最偏
+- **角色优化**：调整偏差角色的权重/评估框架/行为规则
+- **闭环触发**：实际评分提交后自动进入差距分析→优化→下轮审议改进
+
+# 进化反馈协议
 
 ---
 

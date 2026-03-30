@@ -1,7 +1,26 @@
-# 执行落地协议
+---
+name: execute
+command: /执行
+keywords: [执行, 计划, 拆解, 步骤, 落地, OKR, 行动方案]
+execution_level: SHOULD
+type: framework
+domain: organize
+summary: "决策→行动桥梁：目标分解(OKR) + 关键路径 + 最小可行步骤 + 第一步锚定"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：OKR / 关键路径法 / 最小可行步骤 / PDCA
-> 核心原则：**决策→行动的桥梁。想清楚之后，拆成能动手的步骤。**
+## 摘要
+
+- **目标分解**：O(目标)→KR(可量化结果)→任务→最小可行步骤
+- **关键路径**：识别依赖链→找最长路径→优先攻关
+- **第一步锚定**：每个计划必须定义"现在就能做的第一步"，消除启动阻力
+- **PDCA循环**：Plan→Do→Check→Act，每轮迭代更新任务状态
+
+# 执行落地协议
 
 ---
 

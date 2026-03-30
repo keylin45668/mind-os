@@ -1,6 +1,25 @@
-# 决策框架
+---
+name: rules
+command: /排期
+keywords: [紧急, 优先级, 排期]
+execution_level: SHOULD
+type: framework
+domain: decide
+summary: "艾森豪威尔矩阵分流 + 反转思维(正向必须+反向禁止交叉验证) + 决策记录模板"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：艾森豪威尔矩阵 + 反转思维（《穷查理宝典》）
+## 摘要
+
+- **分流**：紧急+重要→立即+偏差全套；重要不紧急→排入深度思考；紧急不重要→AI主导；其余→删除/归档
+- **反转思维**：正向(需要什么)+反向(什么导致失败)→禁止清单+必须清单交叉验证
+- **决策记录**：结构化模板(问题/选项/分析/偏差检查/决定/置信度/回顾日期)
+
+# 决策框架
 
 ---
 

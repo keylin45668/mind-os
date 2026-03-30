@@ -1,6 +1,25 @@
-# 人机协作理论
+---
+name: collaboration-rules
+command: /协作
+keywords: [协作, 分工, 路由]
+execution_level: MAY
+type: framework
+domain: collaboration
+summary: "人机任务路由(绝对+比较优势) + 协作拓扑选择(串联/并联/迭代) + 动态权重分配"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：延展心智 + Licklider人机共生 + 协作量化框架
+## 摘要
+
+- **绝对优势路由**：AI主导(分流/报告/知识整理)→对等(偏差检查)→人类主导(战略/人际/价值观)
+- **比较优势路由**：按双方机会成本分配，每季度重新校准
+- **拓扑选择**：串联(时间有限)→并联(高风险)→迭代(问题模糊)，不确定默认迭代
+
+# 人机协作理论
 
 ---
 

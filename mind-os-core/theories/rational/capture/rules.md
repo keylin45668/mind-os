@@ -1,6 +1,25 @@
-# 收集理论
+---
+name: capture-rules
+command: /收集
+keywords: [收集, inbox, 信息输入]
+execution_level: SHOULD
+type: checklist
+domain: capture
+summary: "GTD收集规则：全捕获→inbox→24h清空，蔡加尼克效应驱动"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：GTD + 蔡加尼克效应
+## 摘要
+
+- **全捕获**：任何新信息/想法/任务→立即进入 runtime/inbox/，不分类不判断不处理
+- **唯一入口**：inbox 是唯一入口，不允许直接写入 data/content/
+- **24h清空**：inbox 积压 > 24h 触发清空流程，蔡加尼克效应驱动
+
+# 收集理论
 
 ---
 

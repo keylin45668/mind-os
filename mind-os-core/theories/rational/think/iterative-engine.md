@@ -1,7 +1,26 @@
-# 迭代思考引擎
+---
+name: iterative-engine
+command: /分析
+keywords: [帮我分析, 深度思考, 多方向, 对比方案, 利弊]
+execution_level: MUST_RUN
+type: specification
+domain: think
+summary: "红蓝对抗迭代引擎：多方向并行探索 + 质量驱动收敛 + 评分 Agent 门控"
+context: isolated
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: "红方须与蓝方观点不同"
+---
 
-> 来源：发散-收敛模型 + 信息论 + 红蓝对抗 + Mind OS 协作拓扑
-> 核心原则：**每个方向红蓝对抗，收敛由文档质量决定而非固定轮次，默认对话输出仅按需落盘**
+## 摘要
+
+- **红蓝对抗**：每个方向蓝方提案→红方质疑（首要=本源检查）→裁决，编号制([B-]/[R-])可追溯
+- **收敛条件**：质量驱动而非固定轮次，red_new==0/confidence plateau/all_resolved 任一触发收敛
+- **并行模型**：层内并行探索多方向，层间串行收敛，state.yaml 为唯一真相源
+- **质量门控**：评分 Agent 5 维打分 ≥ min_score 才允许收敛，不达标追加迭代
+
+# 迭代思考引擎
 
 ---
 

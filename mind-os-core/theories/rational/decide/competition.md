@@ -1,6 +1,26 @@
-# 竞争策略方法论
+---
+name: competition
+command: /竞争
+keywords: [竞争, 对手, 市场, 战略]
+execution_level: SHOULD
+type: framework
+domain: decide
+summary: "五事七计评估 + 博弈识别(囚徒/猎鹿/协调/懦夫) + 不战而胜阶梯 + 虚实分析"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《孙子兵法》+ 博弈论 + 《国富论》
+## 摘要
+
+- **战前评估**：五事(道天地将法)七计对比，>1.2x可进入，±10%需差异化，<0.8x不建议正面竞争
+- **博弈识别**：囚徒困境(价格战)/猎鹿(跨部门协同)/协调(技术选型)/懦夫(强硬谈判)
+- **不战而胜**：伐谋→伐交→伐兵→攻城，有可行方案即停止升级
+- **形势判断**：形(实力)×势(趋势)四象限
+
+# 竞争策略方法论
 
 ---
 

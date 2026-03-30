@@ -1,7 +1,26 @@
-# 任务迭代 — 质量信号与收敛规则
+---
+name: task-iterate-signals
+command: null
+keywords: [迭代信号, 收敛条件, 质量信号]
+execution_level: MUST_RUN
+type: metric
+domain: think
+summary: "深度迭代质量信号(存活率/新发现数/假设验证率/本源偏离度) + 收敛/强停/异常退出条件"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 从 task-iterate.md 拆分，保持单文件 ≤ 1000 tokens。
-> task-iterate.md 定义三层架构和流程，本文件定义度量和停止条件。
+## 摘要
+
+- **四项质量信号**：论点存活率(≥60%)、新发现数(应边际递减)、假设验证率(≥80%)、本源偏离度(≥4)
+- **正常收敛**：连续2轮新发现=0 + 存活率变化<5% + 假设验证≥80%
+- **强制停止**：达 max_rounds(5) / 偏离度<3 / 存活率<30%
+- **异常退出**：R1 红方推翻核心问题本身→停止并重新定义
+
+# 任务迭代 — 质量信号与收敛规则
 
 ---
 

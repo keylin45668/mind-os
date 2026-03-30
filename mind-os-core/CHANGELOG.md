@@ -5,6 +5,58 @@
 
 ---
 
+## v5.3 — 2026-03-30 — 模块自描述 + 渐进加载：借鉴 Claude Code Skills 工程化治理
+
+### 变更摘要
+
+- **Frontmatter 自描述**：44 个 theory 模块全部添加 YAML frontmatter（name/command/keywords/execution_level/type/domain/summary/context/hooks），模块从"被动数据"升级为"自描述单元"
+- **三级渐进加载**：Level 1 metadata(~50t) / Level 2 摘要(~200t) / Level 3 全文，与任务分级联动（🟢 summary_only / 🟡🔴 full）
+- **模块级 Hooks**：Pre-Output Gate 4_depth_check 从 4 条硬编码改为动态聚合各模块 frontmatter hooks，新增模块零配置接入质量门控
+- **上下文隔离**：5 个重量级模块标记 `context: isolated`，支撑 subagent / 独立 API 调用
+- **规范文件**：`schemas/default/module-frontmatter-spec.md` 定义 frontmatter 标准 schema
+- **评估器扩展**：evaluator.md 新增 J 类 12 项检查（权重 22），总权重 141→163
+
+### 新增/修改文件
+
+| 文件 | 变更 |
+|------|------|
+| schemas/default/module-frontmatter-spec.md | 🆕 frontmatter 规范文件 |
+| theories/rational/ 下 44 个模块 | ✏️ 添加 frontmatter + `## 摘要` 节 |
+| theories/rational/meta.md | ✏️ 添加 §8 渐进加载协议 + §9 上下文隔离 + frontmatter 说明 |
+| schemas/default/protocols.md | ✏️ 4_depth_check 改动态聚合 hooks |
+| schemas/default/task-grading.md | ✏️ 添加 §3.1 分级加载深度 |
+| autoevolve/module-evolve.md | ✏️ Step 2 添加 frontmatter 验证 |
+| autoevolve/evaluator.md | ✏️ 新增 J 类 12 项检查 |
+| tests/frontmatter-optimization-tests.md | 🆕 38 个测试用例（10 大类） |
+| autoevolve/scenarios/progressive-loading.md | 🆕 10 个渐进加载场景 |
+| autoevolve/scenarios/dynamic-hooks.md | 🆕 14 个动态 hooks 场景 |
+| docs/superpowers/specs/2026-03-30-frontmatter-progressive-loading.md | 🆕 设计规格文档 |
+| theories/rational/README.md | ✏️ 更新模块格式说明 + 模块统计 |
+| DESIGN-NOTES.md | ✏️ Layer 23 推导记录 |
+| BOOT.md | ✏️ 面板增加渐进加载标识 + 规则 7 补充说明 |
+| config-template.md | ✏️ version 5.2→5.3 |
+| CHANGELOG.md | ✏️ 本条目 |
+
+### 设计原则
+
+- **正交性**：frontmatter 是模块元数据层，与正文内容（思维方法论）正交，互不干扰
+- **向后兼容**：无 frontmatter 的模块仍可通过 meta.md 路由正常工作
+- **渐进增强**：summary_only 加载是优化而非必须，退化行为 = 全量加载（等价于 v5.2 行为）
+- **动态扩展**：新增模块只需写好 frontmatter + hooks，Pre-Output Gate 自动纳入质量门控
+
+### 升级指引（v5.2 → v5.3）
+
+1. `config-template.md` 版本号已更新，如有 `local/config.md` 需手动更新 version: 5.3
+2. 所有 theory 模块已自动添加 frontmatter，无需手动操作
+3. `protocols.md` 的 `4_depth_check` 已改为动态聚合，如有自定义 schema 需同步更新
+4. 新增模块时请遵循 `module-frontmatter-spec.md` 规范添加 frontmatter
+
+### 验证
+
+8 个模拟场景全部 PASS，62 个测试用例覆盖格式/一致性/功能/回归/异常。详见 `tests/frontmatter-optimization-tests.md`。
+
+---
+
 ## v5.2 — 2026-03-27 — 多角色审议：从二元对抗到多方结构化讨论
 
 ### 变更摘要
@@ -80,7 +132,7 @@
 |------|------|
 | projects/_router.md | 🆕 连接器路由表 + 机制说明 + 双向连接 + 桥接模板 |
 | projects/INSTALL.md | 🆕 一句话安装协议（5 步自动化） |
-| projects/zhidu-youhua.md | 🆕 首个连接器卡片示例（制度优化项目） |
+| projects/hr-system.md | 🆕 首个连接器卡片示例（人事系统项目） |
 | BOOT.md | Phase 4 增加 projects/_router.md 并行读取；Phase 5 增加 ①½ 项目匹配步骤；启动面板增加「已接入项目」 |
 | domains/_router.md | 增加项目连接器说明 + 执行顺序更新 |
 | ../CLAUDE.md | 增加 `安装 mind-os` 触发入口 |

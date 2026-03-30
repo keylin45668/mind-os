@@ -1,7 +1,26 @@
-# 沟通策略方法论
+---
+name: communication
+command: /沟通
+keywords: [说服, 谈判, 汇报, 沟通, 表达, 演讲, 怎么说]
+execution_level: SHOULD
+type: framework
+domain: collaboration
+summary: "受众分析→目标定义(BATNA)→策略选择(汇报/说服/谈判/高难度对话)→预演"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：金字塔原理 / BATNA-ZOPA / 非暴力沟通 / STAR 法
-> 核心原则：**先理解对方的立场，再设计你的表达**
+## 摘要
+
+- **受众分析(必做)**：角色/决策权/知识背景 + 核心利益/担忧 + 现有立场 + 信息不对称
+- **目标定义**：底线(BATNA)+理想+隐性(关系)，一次博弈vs重复博弈
+- **策略选择**：汇报(结论先行)/说服(从对方关切出发)/谈判(先扩大蛋糕)/高难度对话(事实→影响→感受→请求)
+- **防退化**：没做受众分析就给话术=无效
+
+# 沟通策略方法论
 
 ---
 

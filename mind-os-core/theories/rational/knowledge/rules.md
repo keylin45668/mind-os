@@ -1,6 +1,25 @@
-# 知识管理理论
+---
+name: knowledge-rules
+command: /知识
+keywords: [笔记, 知识, 学习]
+execution_level: SHOULD
+type: framework
+domain: knowledge
+summary: "Zettelkasten原子笔记 + 跨学科链接(密度≥20%) + 知识价值评估"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：Zettelkasten + 跨学科链接 + 《国富论》
+## 摘要
+
+- **原子笔记**：一条笔记一个想法，用自己的话重述，必须标注学科标签+关联模型+来源
+- **强制关联**：每条笔记至少链接1条已有笔记，AI自动发现跨域连接
+- **价值评估**：use_value > labor_value×2→保留，< 0.5持续3月→降级归档
+
+# 知识管理理论
 
 ---
 

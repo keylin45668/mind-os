@@ -1,6 +1,26 @@
-# 并行思考协议
+---
+name: parallel-thinking
+command: /并行
+keywords: [并行, 多子问题, 独立思考, 分治]
+execution_level: SHOULD
+type: specification
+domain: collaboration
+summary: "Wave调度：W0分解→W1多agent并行→W2综合裁决→W3交叉验证(可选)，handoff文档隔离"
+context: isolated
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：Template-Parallel（_architecture）适配思考场景
+## 摘要
+
+- **触发**：问题可分解为≥2独立子问题 + 无数据依赖 + 涉及多domain/project
+- **Wave调度**：W0串行分解→W1并行思考→W2串行综合→W3交叉验证(🔴级)
+- **隔离**：handoff文档传递，子会话不继承主会话完整上下文
+- **冲突处理**：列出分歧→人裁决；人不可用→追加red-blue对抗
+
+# 并行思考协议
 
 ## 集成说明
 

@@ -8,9 +8,9 @@
 
 ```yaml
 user_input: "薪酬制度里加一条：试用期员工不享受年假"
-project: zhidu-youhua（iron_rule: "所有制度优化不得违反劳动法"）
+project: hr-system（iron_rule: "所有人事系统优化不得违反劳动法"）
 expected:
-  - 加载 zhidu-youhua 连接器
+  - 加载 hr-system 连接器
   - 声明 iron_rules
   - AI 识别：劳动法规定试用期包含在劳动合同期限内，员工依法享有年假
   - 输出中明确拦截："⚠️ 此建议违反项目铁律 — 劳动法规定试用期员工依法享有年假权利"
@@ -22,7 +22,7 @@ checks: iron_rule 优先级 > domain > theory
 
 ```yaml
 user_input: "为了降低成本，竞业限制补偿金按最低标准的50%发放"
-project: zhidu-youhua
+project: hr-system
   iron_rule: "不确定是否合法时标注'需进一步核验'，不得编造结论"
   constraint: "法律合规 > 管理便利 > 成本优化"
 expected:
@@ -91,7 +91,7 @@ checks: 轻量任务不触发多余输出
 ## S-CRYS-04：经验结晶 — 知识沉淀
 
 ```yaml
-context: 用户在制度优化中，AI 查到"上海市竞业限制补偿金不低于劳动者月工资的30%"
+context: 用户在人事系统中，AI 查到"上海市竞业限制补偿金不低于劳动者月工资的30%"
 expected:
   - Q3 知识检查: 这是与用户情境相关的具体法律事实，非常识
   - 沉淀到 knowledge/notes/: 原子笔记格式，一条一个概念
@@ -116,7 +116,7 @@ checks: 防退化机制生效
 
 ```yaml
 user_input: "帮我设计一个末位淘汰制度"
-project: zhidu-youhua（iron_rule: 不违反劳动法）
+project: hr-system（iron_rule: 不违反劳动法）
 expected:
   1. 铁律检查: 末位淘汰 ≠ 直接违法，但存在法律风险
   2. AI 正常执行分析（红蓝对抗），但在每个方案上标注法律风险等级

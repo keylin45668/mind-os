@@ -1,7 +1,25 @@
-# 数字分身协议
+---
+name: digital-avatar
+command: null
+keywords: [数字分身, AI代言, 代理人]
+execution_level: MAY
+type: specification
+domain: deliberation
+summary: "AI代表人类在审议中发言：基于identity数据模拟立场，须标注'代理发言'且人可否决"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：代理人理论 + 人机混合智能
-> 定义人类的 AI 代言机制——在审议中由 AI 代表人类发言
+## 摘要
+
+- **画像构建**：基于 identity/ 数据(价值观/原则/偏好)构建人类立场模型
+- **代言规则**：AI代表人类发言时必须标注"代理发言"，人可随时否决
+- **回传机制**：审议结论回传给本人确认，分歧点标记供人工裁决
+
+# 数字分身协议
 
 ---
 

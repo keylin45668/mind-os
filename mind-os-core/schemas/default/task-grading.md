@@ -66,6 +66,20 @@ pre_input_gate:
 
 ---
 
+## 3.1 分级加载深度
+
+> 与 meta.md 渐进加载协议联动（见 meta.md §8）。
+
+```yaml
+loading_depth:
+  🟢: "summary_only — 只读 frontmatter + ## 摘要（模块无摘要时读全文）"
+  🟡: "full — 读完整模块"
+  🔴: "full — 读完整模块，可分阶段多次加载"
+  说明: "frontmatter 不计入 1000 token 预算，是元数据而非思维内容"
+```
+
+---
+
 ## 4. 动态升降级
 
 - **升级**：执行中发现未预见的风险/复杂度 → 暂停，升级分级，重新过 Pre-Input Gate

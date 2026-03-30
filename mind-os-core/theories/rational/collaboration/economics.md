@@ -1,6 +1,25 @@
-# 经济学底层
+---
+name: economics
+command: /经济
+keywords: [经济, 成本, 资本]
+execution_level: MAY
+type: framework
+domain: collaboration
+summary: "比较优势分工(按机会成本分配) + 自组织三条件 + 认知资本管理"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《国富论》+ 比较优势（Ricardo）
+## 摘要
+
+- **比较优势分工**：按双方机会成本分配任务，每季度重新校准
+- **自组织三条件**：充分信息+自由选择+可退出→允许自组织(最小介入)，任一不满足→系统调度
+- **认知资本**：认知利润(flow_in - flow_out)连续3期为负→资本收缩流程
+
+# 经济学底层
 
 ---
 

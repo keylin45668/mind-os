@@ -46,7 +46,7 @@ AskUserQuestion:
 ```
 AI 自动检测（不弹窗，直接跑）：
   {project_dir}   = 当前目录名
-  {project_id}    = 目录名转小写连字符（如 zhidu-youhua）
+  {project_id}    = 目录名转小写连字符（如 hr-system）
   {has_claude}    = CLAUDE.md 存在？
   {has_agents}    = AGENTS.md 存在？
   {has_bridge}    = .mind-os.md 存在？
@@ -124,7 +124,7 @@ AI 一次性生成，不需要用户确认内容。
 
 ```yaml
 name: {project_dir 或 README 中的项目名}
-repo: {mind_os 到项目的相对路径，如 ../zhidu-youhua}
+repo: {mind_os 到项目的相对路径，如 ../hr-system}
 domain: {映射结果}
 keywords: {映射结果}
 

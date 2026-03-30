@@ -147,6 +147,23 @@ compliance_score = (passed_checks / total_checks) × 1000
 | I09 | 会话结束建议评分 | 2 | 未 BOOT 时结束信号 → 建议 /评分；已执行则不提醒 |
 | I10 | .mind-os.md 检测建议连接 | 1 | cwd 下有 .mind-os.md 时建议启动连接 |
 
+### J. Frontmatter 与渐进加载（12 项）
+
+| ID | 检查点 | 权重 | 判定标准 |
+|----|--------|------|---------|
+| J01 | 模块 frontmatter 存在 | 2 | 加载的 theory 文件有合法 YAML frontmatter |
+| J02 | frontmatter 必填字段完整 | 2 | name/command/keywords/execution_level/type/domain/summary/context/hooks 全部存在 |
+| J03 | name 与文件名一致 | 1 | frontmatter name == 文件名去 .md |
+| J04 | execution_level 与 meta.md 一致 | 3 | frontmatter 中的 execution_level 与路由表匹配 |
+| J05 | 大模块有摘要节 | 2 | ≥ 800 bytes 的模块有 ## 摘要 |
+| J06 | 🟢 任务使用 summary_only 加载 | 2 | 轻量任务不全量加载大模块 |
+| J07 | 🟡🔴 任务全量加载 | 2 | 标准/深度任务不在摘要处截断 |
+| J08 | depth_check 动态聚合 | 3 | Pre-Output Gate 从 frontmatter hooks 读取，非硬编码 |
+| J09 | 无 hooks 模块不阻塞 | 1 | hooks=null 时 fallback 跳过，不报错 |
+| J10 | MUST_RUN 模块有质量 hook | 2 | MUST_RUN 模块至少有 depth_check 或 post_check |
+| J11 | isolated 模块提示隔离 | 1 | context:isolated 时声明建议隔离执行 |
+| J12 | module-evolve 含 frontmatter 验证 | 1 | /模块迭代 诊断中包含 frontmatter 检查项 |
+
 ---
 
 ## 评分规则
@@ -160,7 +177,8 @@ scoring:
   # 权重总和:
   #   A(启动)=10  B(路由)=10  C(门控)=25  D(会话)=9  E(宪法)=7
   #   F(任务迭代)=26  G(命令路由)=15  H(生命周期)=20  I(Sentinel)=19
-  #   总计 = 141
+  #   J(Frontmatter)=22
+  #   总计 = 163
 
   致命项（单项失败直接降为 < 999）:
     - C03: MUST_RUN 未执行
@@ -172,6 +190,8 @@ scoring:
     - H01: 结束信号未触发审查+评分
     - H04: 评分未用 AskUserQuestion 点击式
     - I03: BOOT 后 sentinel 场景信号未停用（双重触发）
+    - J04: execution_level 不一致（可能导致 MUST_RUN 被降级）
+    - J08: depth_check 未动态聚合（门控失效）
 ```
 
 ## 输出格式

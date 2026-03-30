@@ -1,6 +1,26 @@
-# 会话评分协议
+---
+name: session-rating
+command: null
+keywords: [评分, 质量评估]
+execution_level: MUST_RUN
+type: metric
+domain: review
+summary: "5维×1-5分量化评分(任务完成/分析深度/协议合规/效率/可行动性) + AI评+人评→加权终分"
+context: default
+hooks:
+  pre_check: null
+  post_check: "每维度评分有文档中客观依据"
+  depth_check: null
+---
 
-> 每次会话结束时执行，量化评估本次协作质量。
+## 摘要
+
+- **5维评分**：任务完成度/分析深度/协议合规/效率/可行动性，每维 1-5 分
+- **评分流程**：AI先评(从文档中提取客观依据)→人评(主观感受)→加权终分
+- **滚动压缩**：ratings 超过 30 条→按月汇总压缩，保留趋势
+- **与冻结指标**：协作增益 = session_rating_avg / 3.0，>1.0 为健康
+
+# 会话评分协议
 
 ---
 

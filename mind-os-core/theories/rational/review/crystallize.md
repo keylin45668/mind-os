@@ -1,7 +1,26 @@
-# 经验结晶协议
+---
+name: crystallize
+command: /结晶
+keywords: [结晶, 任务后]
+execution_level: SHOULD
+type: framework
+domain: review
+summary: "任务后三问：发现模式?→知识库 / 发现缺口?→审计backlog / 可复用知识?→笔记"
+context: default
+hooks:
+  pre_check: null
+  post_check: "三问全部执行且有结论（即使是'无信号'）"
+  depth_check: null
+---
 
-> 来源：宪法第五条（迭代即存在）+ _architecture 经验沉淀规则
-> 核心原则：**每次任务结束时提取进化信号，不可丢弃。用了 100 次和 1 次一样 = 违宪。**
+## 摘要
+
+- **三问框架**：模式发现→写入knowledge/notes / 缺口发现→写入runtime/audits/backlog / 可复用知识→笔记
+- **触发**：每次任务完成后自动触发(meta.md 路由表中标记自动触发)
+- **无信号也要记录**：记录"本次无信号"，防止遗漏成为习惯
+- **宪法关联**：第五条"迭代即存在"的执行层
+
+# 经验结晶协议
 
 ---
 

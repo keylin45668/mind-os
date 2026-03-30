@@ -164,6 +164,62 @@ relevance_ranking:
 
 ---
 
+## 渐进加载协议
+
+> 借鉴 Claude Code Skills 三级渐进披露模式，与任务分级联动。
+
+```yaml
+8. 渐进加载（与任务分级联动）:
+   说明: "模块已支持 frontmatter 自描述（见 schemas/default/module-frontmatter-spec.md），启用三级加载"
+
+   Level_1_metadata:
+     内容: frontmatter 的 summary 字段（~50 tokens）
+     用途: 路由表展示、/模块列表 命令、模块间引用
+     获取方式: 始终可用（路由匹配阶段）
+
+   Level_2_summary:
+     内容: frontmatter + ## 摘要 section（~200 tokens）
+     用途: 🟢 轻量任务的执行参考
+     获取方式: 读到 ## 摘要 后的下一个 ## 标题处停止
+     例外: 模块无 ## 摘要（tiny 模块）→ 读全文（本身在预算内）
+
+   Level_3_full:
+     内容: 完整文件
+     用途: 🟡🔴 标准/深度任务
+     获取方式: 读取全文
+
+   任务分级联动:
+     🟢: Level_2（summary_only）
+     🟡: Level_3（full）
+     🔴: Level_3（full，可分阶段多次加载）
+
+9. 上下文隔离:
+   触发: 模块 frontmatter 中 context == isolated
+   含义: 该模块涉及多轮迭代/多角色审议/并行思考，建议在隔离上下文中执行
+   行为:
+     Claude_Code: 建议在 subagent 中执行（Agent 工具 context: fork）
+     Company_Mind_OS: 建议在独立 API 调用链中执行
+   降级: 无法隔离时在当前上下文执行，声明"⚠️ 建议新窗口执行以避免上下文污染"
+   当前 isolated 模块:
+     - think/iterative-engine.md（多轮红蓝对抗）
+     - think/task-iterate.md（任务级多轮迭代）
+     - deliberation/protocol.md（多角色审议）
+     - collaboration/parallel-thinking.md（多 agent 并行）
+     - review/cross-session-audit.md（跨会话独立复审）
+```
+
+---
+
+## Frontmatter 自描述
+
+> 所有 theory 模块已支持 YAML frontmatter 自描述。详见 `schemas/default/module-frontmatter-spec.md`。
+>
+> - 模块的 command/keywords/execution_level 同时存在于 frontmatter 和本路由表中
+> - 一致性由 module-evolve.md Step 2 诊断验证
+> - 未来演进：路由表可从各模块 frontmatter 自动生成
+
+---
+
 ## 理论来源
 
 《思考，快与慢》/ 《穷查理宝典》/ 《反脆弱》/ 《黑天鹅》/ 《孙子兵法》/ 《道德经》/ 《系统之美》/ 《第五项修炼》/ 《原则》/ 《复杂》/ 《国富论》/ **《物种起源》** / GTD / PARA / Zettelkasten / 延展心智论 / Licklider人机共生 / 博弈论 / 比较优势

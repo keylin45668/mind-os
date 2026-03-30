@@ -1,6 +1,19 @@
-# 过度自信 + 事前验尸 + 反转
+---
+name: bias-overconfidence
+command: null
+keywords: [大额, 战略, 不可逆]
+execution_level: SHOULD
+type: checklist
+domain: think
+summary: "过度自信检测：事前验尸(假设失败) + 失败路径排序 + 历史校准"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《思考，快与慢》《穷查理宝典》
+# 过度自信 + 事前验尸 + 反转
 
 ```yaml
 trigger: 金额 > 大额阈值 OR 战略级 OR 不可逆承诺

@@ -1,6 +1,19 @@
-# 规划谬误
+---
+name: bias-planning
+command: null
+keywords: [项目计划, 时间估算, 排期]
+execution_level: SHOULD
+type: checklist
+domain: think
+summary: "规划谬误检测：历史基准预测 + 置信区间 + 时间预算系数"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《思考，快与慢》
+# 规划谬误
 
 ```yaml
 trigger: 新项目 OR 更新项目时间线

@@ -1,7 +1,26 @@
-# 系统审计方法论
+---
+name: system-audit-method
+command: /审计
+keywords: [审计, 迭代, 系统检查]
+execution_level: MUST_RUN
+type: specification
+domain: think
+summary: "两条审计路径(Top-Down/Bottom-Up) + 四种挖掘方法(数学形式化/原子分解/正反对称/同构检验) + 焦距交替"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: "至少 2 个方法有实质产出"
+---
 
-> 来源：《AI 协作思维框架 v2.0》
-> 用途：系统自迭代（schema/protocols.md）中"审计"原语的具体方法
+## 摘要
+
+- **两条路径**：A=本源先行(Top-Down)适用本源明确场景；B=方案先行(Bottom-Up)适用本源不明场景，默认选 B
+- **四种方法**：A 数学形式化 / B 原子操作分解(≤7个) / C 正反对称检验 / D 同构检验(>80%匹配则合并)
+- **焦距交替**：每 2-3 轮切换望远镜(全局)↔显微镜(局部)，连续两轮被否→焦距可能不对
+- **深度追问**：向下(找更深本源) + 向上(找更广组合) + 横向(找遗漏维度) + 用户视角
+
+# 系统审计方法论
 
 ---
 

@@ -1,7 +1,25 @@
-# 审议模块路由表
+---
+name: deliberation-meta
+command: /审议
+keywords: [多角色, 审议, 多视角, 角色讨论, 多方讨论]
+execution_level: SHOULD
+type: router
+domain: deliberation
+summary: "多角色审议子路由：角色元模型 + 审议协议 + 评分体系 + 决策分级 + 进化反馈"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 多角色审议理论子域：角色定义、审议协议、评分体系、决策分级
-> **本文件是 deliberation/ 的内部索引，由根 meta.md 路由到此。**
+## 摘要
+
+- **文件索引**：role-meta(角色定义) / protocol(审议流程) / scoring(评分) / decision-levels(决策分级) / digital-avatar(AI代言) / evolution(进化反馈)
+- **加载规则**：本文件为入口，按任务需要加载具体文件，max 3个，≤1000 tokens/文件
+- **与红蓝辩论互补**：审议处理多角色多方讨论，红蓝辩论处理二元对抗
+
+# 审议模块路由表
 
 ---
 

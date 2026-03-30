@@ -1,3 +1,24 @@
+---
+name: cross-session-audit
+command: /跨审
+keywords: [新窗口, 跨会话审计, self-review, 确认偏差, 独立复核, 二次推导]
+execution_level: SHOULD
+type: specification
+domain: review
+summary: "跨会话独立复审：新窗口重新推导→与原结论对比→标记分歧，深度思考/不可逆决策时升级MUST_RUN"
+context: isolated
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
+
+## 摘要
+
+- **独立复审**：新窗口中不看原始结论，独立重新推导→与原结论对比→标记分歧
+- **触发条件**：深度思考/不可逆决策时升级为 MUST_RUN，日常任务为 SHOULD
+- **防确认偏差**：隔离上下文执行，避免被原会话结论锚定
+
 # 跨会话审计协议
 
 ## 集成说明

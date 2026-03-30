@@ -19,6 +19,12 @@
 - 与其他模块有重复/冲突？
 - 上次修改距今多久？（git log）
 - autoevolve results.tsv 中相关场景合规率？
+- **Frontmatter 验证**（见 `schemas/default/module-frontmatter-spec.md`）：
+  - 是否有 YAML frontmatter？无 → ❌ "缺少 frontmatter，请添加"
+  - name 是否与文件名（去 .md）一致？
+  - keywords 和 execution_level 是否与 meta.md 路由表一致？
+  - 模块正文 ≥ 800 bytes 时是否有 `## 摘要` 节？
+  - hooks 是否覆盖关键质量点（MUST_RUN 模块必须有 depth_check）？
 
 输出诊断报告（✅正常 / ⚠️可改进 / ❌问题 + 建议方向）。
 

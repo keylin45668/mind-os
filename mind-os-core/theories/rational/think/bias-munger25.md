@@ -1,8 +1,26 @@
-# 芒格25条心理误判补充
+---
+name: bias-munger25
+command: null
+keywords: [团队决策, 薪酬, 绩效]
+execution_level: SHOULD
+type: framework
+domain: think
+summary: "芒格25条补充：社会认同/激励偏差/一致性偏差/回馈倾向/避免怀疑/Lollapalooza叠加效应"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: null
+---
 
-> 来源：《穷查理宝典》— 人类误判心理学
-> 定位：与卡尼曼偏差检查互补，覆盖社会心理学和行为经济学盲区
-> 原则：只映射 bias-*.md 尚未覆盖的条目，避免重复
+## 摘要
+
+- **覆盖缺口**：补充卡尼曼偏差模块未覆盖的社会心理学维度（激励机制、喜爱/讨厌、回馈、社会认同等）
+- **场景映射**：团队决策→社会认同+权威服从；薪酬设计→激励偏差；评价人→喜爱/讨厌倾向
+- **Lollapalooza 警报**：≥3个偏差同方向→强制 /反脆弱 + /跨审
+- **与现有模块关系**：互补不重复，已由其他 bias-*.md 覆盖的条目不在本文件中
+
+# 芒格25条心理误判补充
 
 ---
 

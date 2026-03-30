@@ -1,8 +1,26 @@
-# 会话执行审查协议
+---
+name: session-audit
+command: /评分
+keywords: [会话结束, 评分, 质量]
+execution_level: MUST_RUN
+type: metric
+domain: review
+summary: "会话结束审查：协议执行合规检查 + 系统优化点发现，与session-rating串行(先审后评)"
+context: default
+hooks:
+  pre_check: null
+  post_check: "审查清单每项有具体依据"
+  depth_check: null
+---
 
-> 每次会话结束时执行，与 session-rating 串行（先审查，后评分）。
-> 目的：检查执行过程合规性 + 发现系统优化点。
-> session-rating 回答"多少分"，本协议回答"哪里没做到、系统怎么改"。
+## 摘要
+
+- **定位**：回答"哪里没做到、系统怎么改"（session-rating 回答"多少分"）
+- **执行时机**：会话结束时，先执行本协议审查，再进入 session-rating 评分
+- **检查维度**：MUST_RUN 是否全部执行 / Pre-Output Gate 是否合规 / 是否有遗漏的偏差检查
+- **输出**：优化建议写入 runtime/audits/backlog.md
+
+# 会话执行审查协议
 
 ---
 

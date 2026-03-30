@@ -1,7 +1,26 @@
-# 创造力引擎
+---
+name: creative
+command: /创意
+keywords: [设计, 创意, 方案, 产品, 点子, 命名, 想个]
+execution_level: SHOULD
+type: framework
+domain: think
+summary: "发散-收敛创造力引擎：约束提取→四种发散路径(类比/逆向/SCAMPER/极端约束)→收敛筛选"
+context: default
+hooks:
+  pre_check: null
+  post_check: null
+  depth_check: "发散阶段至少用2种路径"
+---
 
-> 来源：SCAMPER / 类比迁移 / 约束创造力 / 发散-收敛模型
-> 核心原则：**先发散不评判，再用决策模块收敛筛选**
+## 摘要
+
+- **约束提取**：分离不可变约束(预算/法规)与可变约束(假设/惯例)，可变约束是创意入口
+- **四种发散**：类比迁移(跨领域) / 逆向设计(失败→反转) / SCAMPER(7维变体) / 极端约束(1/10预算)
+- **产出要求**：至少5个差异化方案，每个一句话+核心假设
+- **收敛**：宪法第四条本源检查→不可变约束淘汰→剩余进 iterative-engine 或 antifragile
+
+# 创造力引擎
 
 ---
 
