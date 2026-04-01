@@ -35,6 +35,7 @@
 | `/深度迭代` | 深度迭代/多轮迭代/加速思考 | think/task-iterate.md | **MUST_RUN** | 任务级自动多轮迭代（蓝红N轮+收敛检测） |
 | `/创意` | 设计/创意/方案/产品/点子/命名/想个 | think/creative.md | SHOULD | 发散-收敛创造力引擎 |
 | `/执行` | 执行/计划/拆解/步骤/落地/OKR/行动方案 | organize/execute.md | SHOULD | 决策→行动桥梁（目标分解+第一步锚定） |
+| `/工作管理` | 决策/需求/任务/工作管理/项目管理/拆任务/需求分析 | organize/drt.md | SHOULD | DRT正交模型：Why×What×How 三维正交+分形递归 |
 | `/沟通` | 说服/谈判/汇报/沟通/表达/演讲/怎么说 | collaboration/communication.md | SHOULD | 受众分析+策略选择+预演 |
 | `/学习` | 学习/入门/提升/技能/怎么学/学习路径 | knowledge/learning.md | SHOULD | 费曼技巧+刻意练习+能力圈扩展 |
 | — | 确定性/证据/可信度/分层标注 | think/certainty-layers.md | SHOULD | 确定性分层标注（决策/风险时升级 MUST_RUN） |
